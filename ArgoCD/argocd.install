@@ -1,0 +1,27 @@
+kubectl create namespace argocd
+
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+
+kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
+
+argocd login
+
+argocd account update-password
+
+
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+
+
+Gitlab details:     http://10.241.101.13 root/P@ssword1
+ArgoCD Credentials: 10.241.229.2:8080   admin/argocd-server-7c95d549d4-nl5rb
+
+Argocd@123
+
+
+--------------------
+aws eks update-kubeconfig --name paxata-dev-eks --region us-west-2 --profile default
+
+kubectl port-forward svc/argocd-server -n argocd 4040:443
