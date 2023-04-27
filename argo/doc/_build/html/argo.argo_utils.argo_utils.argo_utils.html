@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>argo.argo_utils.argo_utils.argo_utils module &mdash; ARGO  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="argo.correlation_reduction package" href="argo.correlation_reduction.html" />
+    <link rel="prev" title="argo.argo_utils.argo_utils package" href="argo.argo_utils.argo_utils.html" />
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ARGO
+          
+
+          
+            
+            <img src="_static/argo_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="argo.html">argo package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="argo.html#notebooks">Notebooks</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="argo.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="argo.argo_utils.html">argo.argo_utils package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="argo.argo_utils.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="argo.correlation_reduction.html">argo.correlation_reduction package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.read_data.html">argo.read_data package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_application.html">argo.rule_application package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_filtering.html">argo.rule_filtering package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_generation.html">argo.rule_generation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_optimisation.html">argo.rule_optimisation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_scoring.html">argo.rule_scoring package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rules.html">argo.rules package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.simility_apis.html">argo.simility_apis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.simility_requests.html">argo.simility_requests package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.system_config_generation.html">argo.system_config_generation package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ARGO</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="argo.html">argo package</a> &raquo;</li>
+        
+          <li><a href="argo.argo_utils.html">argo.argo_utils package</a> &raquo;</li>
+        
+          <li><a href="argo.argo_utils.argo_utils.html">argo.argo_utils.argo_utils package</a> &raquo;</li>
+        
+      <li>argo.argo_utils.argo_utils.argo_utils module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/argo.argo_utils.argo_utils.argo_utils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-argo.argo_utils.argo_utils.argo_utils">
+<span id="argo-argo-utils-argo-utils-argo-utils-module"></span><h1>argo.argo_utils.argo_utils.argo_utils module<a class="headerlink" href="#module-argo.argo_utils.argo_utils.argo_utils" title="Permalink to this headline">¶</a></h1>
+<p>Shared functions for ARGO packages</p>
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.convert_conditions_to_argo_string">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">convert_conditions_to_argo_string</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_conditions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns_int</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns_cat</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#convert_conditions_to_argo_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.convert_conditions_to_argo_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a list of conditions to the standard ARGO string format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list_of_conditions</strong> (<em>list</em>) – Each element contains a tuple of the
+feature (str), operator (str) and value (numeric) for each
+condition in the rule.</p></li>
+<li><p><strong>columns_int</strong> (<em>list</em>) – List of integer columns.</p></li>
+<li><p><strong>columns_cat</strong> (<em>list</em>) – List of OHE categorical columns.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The ARGO-readable rule name.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.clean_dup_features_from_conditions">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">clean_dup_features_from_conditions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_conditions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#clean_dup_features_from_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.clean_dup_features_from_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes unnecessary conditions from a rule (e.g. for a branch in a tree,
+the same feature and condition can be referenced, the threshold value is
+different. This method just takes the relevant threshold value).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list_of_conditions</strong> (<em>list</em>) – Each element contains a tuple of the
+feature, operator and value for each condition in the rule.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cleaned list of conditions</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.generate_empty_data_structures">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">generate_empty_data_structures</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">tuple</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#generate_empty_data_structures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.generate_empty_data_structures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates data structures often used in classes in ARGO.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Contains the rule_descriptions and X_rules dataframes</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.return_columns_types">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">return_columns_types</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">tuple</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#return_columns_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.return_columns_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the integer, float and OHE categorical columns for a given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>pd.DataFrame</em>) – Dataset.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>list of integer columns, list of float columns, list of OHE</dt><dd><p>categorical columns</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.sort_rule_dfs_by_opt_metric">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">sort_rule_dfs_by_opt_metric</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_descriptions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_rules</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">tuple</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#sort_rule_dfs_by_opt_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.sort_rule_dfs_by_opt_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for sorting and reindexing rule_descriptions and X_rules by
+opt_metric</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.combine_rule_dfs">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">combine_rule_dfs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_descriptions_1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_rules_1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_descriptions_2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_rules_2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">tuple</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#combine_rule_dfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.combine_rule_dfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combines the rule_description and X_rules object of two rule sets</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.return_opt_func_perf">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">return_opt_func_perf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt_func</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#return_opt_func_perf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.return_opt_func_perf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the given optimisation function across one or multiple binary
+predictors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>opt_func</strong> (<em>object</em>) – A function/method which calculates a custom metric
+(e.g. Fbeta score) for each column.</p></li>
+<li><p><strong>y_preds</strong> (<em>np.ndarray</em>) – Set of binary integer predictors. Can also be a
+single predictor.</p></li>
+<li><p><strong>y_true</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Binary integer target column. Defaults
+to None.</p></li>
+<li><p><strong>sample_weight</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Row-wise sample_weights to apply.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The optimisation metric for each record.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.return_binary_pred_perf_of_set_numpy">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">return_binary_pred_perf_of_set_numpy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_preds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_preds_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#return_binary_pred_perf_of_set_numpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.return_binary_pred_perf_of_set_numpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the performance of a set of binary predictors given a target
+column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>np.ndarray</em>) – Binary integer target column.</p></li>
+<li><p><strong>y_preds</strong> (<em>np.ndarray</em>) – Set of binary integer predictors. Can also be a
+single predictor.</p></li>
+<li><p><strong>y_preds_columns</strong> (<em>list</em>) – Column names for the y_preds array.</p></li>
+<li><p><strong>sample_weight</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Row-wise sample_weights to apply.
+Defaults to None.</p></li>
+<li><p><strong>opt_func</strong> (<em>object</em><em>, </em><em>optional</em>) – A function/method which calculates a
+custom metric (e.g. Fbeta score) for each column. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dataframe containing the performance metrics for each</dt><dd><p>binary predictor.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.return_rule_descriptions_from_X_rules">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">return_rule_descriptions_from_X_rules</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_rules</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_rules_cols</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#return_rule_descriptions_from_X_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.return_rule_descriptions_from_X_rules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the performance metrics for the standard <cite>rule_descriptions</cite>
+dataframe, given a set of rule binary columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_rules</strong> (<em>pd.DataFrame</em>) – Set of rule binary columns.</p></li>
+<li><p><strong>X_rules_cols</strong> (<em>list</em>) – Columns associated with <cite>X_rules</cite>.</p></li>
+<li><p><strong>y_true</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Binary integer target column. Defaults
+to None.</p></li>
+<li><p><strong>sample_weight</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Row-wise sample_weights to apply.
+Defaults to None.</p></li>
+<li><p><strong>opt_func</strong> (<em>object</em><em>, </em><em>optional</em>) – A function/method which calculates a
+custom metric (e.g. Fbeta score) for each rule. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The performance metrics for the standard</dt><dd><p><cite>rule_descriptions</cite> dataframe.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.flatten_stringified_json_column">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">flatten_stringified_json_column</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#flatten_stringified_json_column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.flatten_stringified_json_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flattens JSONs contained in a column to their own columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X_column</strong> (<em>pd.Series</em>) – Contains the JSONs to be flattened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Contains a column per key-value pair in the JSONs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="argo.argo_utils.argo_utils.argo_utils.count_rule_conditions">
+<code class="sig-prename descclassname"><span class="pre">argo.argo_utils.argo_utils.argo_utils.</span></code><code class="sig-name descname"><span class="pre">count_rule_conditions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_string</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/argo/argo_utils/argo_utils/argo_utils.html#count_rule_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.argo_utils.argo_utils.argo_utils.count_rule_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts the number of conditions in a rule string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rule_string</strong> (<em>str</em>) – The standard ARGO string representation
+of the rule.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of conditions in the rule.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="argo.correlation_reduction.html" class="btn btn-neutral float-right" title="argo.correlation_reduction package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="argo.argo_utils.argo_utils.html" class="btn btn-neutral float-left" title="argo.argo_utils.argo_utils package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Simility Data Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

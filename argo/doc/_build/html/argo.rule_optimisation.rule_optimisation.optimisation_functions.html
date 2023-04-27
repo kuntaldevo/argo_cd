@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>argo.rule_optimisation.rule_optimisation.optimisation_functions module &mdash; ARGO  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="argo.rule_optimisation.rule_optimisation.rule_optimiser module" href="argo.rule_optimisation.rule_optimisation.rule_optimiser.html" />
+    <link rel="prev" title="argo.rule_optimisation.rule_optimisation package" href="argo.rule_optimisation.rule_optimisation.html" />
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ARGO
+          
+
+          
+            
+            <img src="_static/argo_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="argo.html">argo package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="argo.html#notebooks">Notebooks</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="argo.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="argo.argo_utils.html">argo.argo_utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.correlation_reduction.html">argo.correlation_reduction package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.read_data.html">argo.read_data package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_application.html">argo.rule_application package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_filtering.html">argo.rule_filtering package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_generation.html">argo.rule_generation package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="argo.rule_optimisation.html">argo.rule_optimisation package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="argo.rule_optimisation.html#notebooks">Notebooks</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="argo.rule_optimisation.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_scoring.html">argo.rule_scoring package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rules.html">argo.rules package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.simility_apis.html">argo.simility_apis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.simility_requests.html">argo.simility_requests package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.system_config_generation.html">argo.system_config_generation package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ARGO</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="argo.html">argo package</a> &raquo;</li>
+        
+          <li><a href="argo.rule_optimisation.html">argo.rule_optimisation package</a> &raquo;</li>
+        
+          <li><a href="argo.rule_optimisation.rule_optimisation.html">argo.rule_optimisation.rule_optimisation package</a> &raquo;</li>
+        
+      <li>argo.rule_optimisation.rule_optimisation.optimisation_functions module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/argo.rule_optimisation.rule_optimisation.optimisation_functions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-argo.rule_optimisation.rule_optimisation.optimisation_functions">
+<span id="argo-rule-optimisation-rule-optimisation-optimisation-functions-module"></span><h1>argo.rule_optimisation.rule_optimisation.optimisation_functions module<a class="headerlink" href="#module-argo.rule_optimisation.rule_optimisation.optimisation_functions" title="Permalink to this headline">¶</a></h1>
+<p>Classes for calculating optimisation metrics</p>
+<dl class="py class">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.Precision">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">argo.rule_optimisation.rule_optimisation.optimisation_functions.</span></code><code class="sig-name descname"><span class="pre">Precision</span></code><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#Precision"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.Precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculates the Precision using Numpy</p>
+<dl class="py method">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.Precision.fit">
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#Precision.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.Precision.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Precision using Numpy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The target column.</p></li>
+<li><p><strong>y_pred</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The binary predictor column.</p></li>
+<li><p><strong>sample_weight</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) – Row-wise weights to apply.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Precision score.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.Recall">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">argo.rule_optimisation.rule_optimisation.optimisation_functions.</span></code><code class="sig-name descname"><span class="pre">Recall</span></code><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#Recall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.Recall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculates the Recall using Numpy</p>
+<dl class="py method">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.Recall.fit">
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#Recall.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.Recall.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Recall using Numpy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The target column.</p></li>
+<li><p><strong>y_pred</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The binary predictor column.</p></li>
+<li><p><strong>sample_weight</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) – Row-wise weights to apply.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Recall score.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.FScore">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">argo.rule_optimisation.rule_optimisation.optimisation_functions.</span></code><code class="sig-name descname"><span class="pre">FScore</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#FScore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.FScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculates the Fbeta score using Numpy</p>
+<dl class="py method">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.FScore.fit">
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#FScore.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.FScore.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Fbeta score using Numpy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The target column.</p></li>
+<li><p><strong>y_pred</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The binary predictor column.</p></li>
+<li><p><strong>sample_weight</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) – Row-wise weights to apply.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Fbeta score.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.Revenue">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">argo.rule_optimisation.rule_optimisation.optimisation_functions.</span></code><code class="sig-name descname"><span class="pre">Revenue</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chargeback_multiplier</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#Revenue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.Revenue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculates the revenue</p>
+<dl class="py method">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.Revenue.fit">
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#Revenue.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.Revenue.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the revenue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The target column.</p></li>
+<li><p><strong>y_pred</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The binary predictor column.</p></li>
+<li><p><strong>sample_weight</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – Row-wise transaction
+amounts to apply.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Revenue.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.AlertsPerDay">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">argo.rule_optimisation.rule_optimisation.optimisation_functions.</span></code><code class="sig-name descname"><span class="pre">AlertsPerDay</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_alerts_expected_per_day</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_of_days_in_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#AlertsPerDay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.AlertsPerDay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculates the negative squared difference between the number of alerts per
+day in the binary predictor vs the expected.</p>
+<dl class="py method">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.AlertsPerDay.fit">
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#AlertsPerDay.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.AlertsPerDay.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the negative squared difference between the number of alerts
+per day in the binary predictor vs the expected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_pred</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The binary predictor column.</p></li>
+<li><p><strong>n_alerts_expected_per_day</strong> – The expected number of alerts per day
+for the given rule.</p></li>
+<li><p><strong>no_of_days_in_file</strong> – The number of days of data provided in
+<cite>y_pred</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The negative squared difference between the number of alerts</dt><dd><p>per day in <cite>y_pred</cite> vs <cite>n_alerts_expected_per_day</cite>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.PercVolume">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">argo.rule_optimisation.rule_optimisation.optimisation_functions.</span></code><code class="sig-name descname"><span class="pre">PercVolume</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perc_vol_expected</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#PercVolume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.PercVolume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculates the negative squared difference between the percentage of the
+overall volume that the binary predictor flags vs the expected.</p>
+<dl class="py method">
+<dt id="argo.rule_optimisation.rule_optimisation.optimisation_functions.PercVolume.fit">
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="_modules/argo/rule_optimisation/rule_optimisation/optimisation_functions.html#PercVolume.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#argo.rule_optimisation.rule_optimisation.optimisation_functions.PercVolume.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the negative squared difference between the percentage of
+the overall volume that the binary predictor flags vs the expected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_pred</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>pd.Series</em><em>]</em>) – The binary predictor column.</p></li>
+<li><p><strong>n_alerts_expected_per_day</strong> – The expected number of alerts per day
+for the given rule.</p></li>
+<li><p><strong>no_of_days_in_file</strong> – The number of days of data provided in
+<cite>y_pred</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the negative squared difference between the percentage of</dt><dd><p>the overall volume that <cite>y_pred</cite> flags vs <cite>perc_vol_expected</cite>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="argo.rule_optimisation.rule_optimisation.rule_optimiser.html" class="btn btn-neutral float-right" title="argo.rule_optimisation.rule_optimisation.rule_optimiser module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="argo.rule_optimisation.rule_optimisation.html" class="btn btn-neutral float-left" title="argo.rule_optimisation.rule_optimisation package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Simility Data Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

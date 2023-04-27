@@ -1,0 +1,1612 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ARGO Example (using an unlabelled dataset) &mdash; ARGO  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="argo.argo_utils package" href="argo.argo_utils.html" />
+    <link rel="prev" title="ARGO Example" href="argo_example.html" />
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ARGO
+          
+
+          
+            
+            <img src="_static/argo_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="argo.html">argo package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="argo.html#notebooks">Notebooks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="argo_example.html">ARGO Example</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ARGO Example (using an unlabelled dataset)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Table-of-contents">Table of contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Import-packages">Import packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Read/process-data">Read/process data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Rule-Optimisation">Rule Optimisation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Identify-uneccessary-rules">Identify uneccessary rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Remove-filtered-rules-from-rule-set">Remove filtered rules from rule set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Test-final-rule-set">Test final rule set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Update-the-system-ready-configs-of-the-rules">Update the system-ready configs of the rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Update-the-Simility-environment-with-the-final-rule-set">Update the Simility environment with the final rule set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#The-End">The End</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="argo.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ARGO</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="argo.html">argo package</a> &raquo;</li>
+        
+      <li>ARGO Example (using an unlabelled dataset)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/argo_unlabelled_example.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="ARGO-Example-(using-an-unlabelled-dataset)">
+<h1>ARGO Example (using an unlabelled dataset)<a class="headerlink" href="#ARGO-Example-(using-an-unlabelled-dataset)" title="Permalink to this headline">¶</a></h1>
+<p>This notebook contains an example of how the ARGO package can be used to:</p>
+<ul class="simple">
+<li><p>Optimise existing rules</p></li>
+<li><p>Identify unnecessary rules</p></li>
+<li><p>Test final rule set on test data</p></li>
+<li><p>Generate/update the system-ready configs of the final rule set</p></li>
+<li><p>Update the Simility environment with the final rule set</p></li>
+</ul>
+<p><strong>Currently, ARGO is unable to generate rules or scores using an unlabelled dataset.</strong></p>
+<div class="section" id="Requirements">
+<h2>Requirements<a class="headerlink" href="#Requirements" title="Permalink to this headline">¶</a></h2>
+<p>To run, you’ll need the following:</p>
+<ul class="simple">
+<li><p>Install the ARGO package - see the readme for more information.</p></li>
+<li><p>A raw, unlabelled dataset.</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+<div class="section" id="Table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#Table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="#ReadProcessData">Read/process data</a></p></li>
+<li><p><a class="reference external" href="#RuleOptimisation">Rule Optimisation</a></p></li>
+<li><p><a class="reference external" href="#CombineRules">Identify unnecessary rules</a></p></li>
+<li><p><a class="reference external" href="#RemoveFiltered">Remove filtered rules from rule set</a></p></li>
+<li><p><a class="reference external" href="#TestFinal">Test final rule set on test data</a></p></li>
+<li><p><a class="reference external" href="#GenUpdateSysConfigs">Update the system-ready configs of the rules</a></p></li>
+<li><p><a class="reference external" href="#UpdateSimility">Update the Simility environment with the final rule set</a></p></li>
+</ol>
+<hr class="docutils" />
+</div>
+<div class="section" id="Import-packages">
+<h2>Import packages<a class="headerlink" href="#Import-packages" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">simility_apis.set_password</span> <span class="kn">import</span> <span class="n">set_password</span>
+<span class="kn">from</span> <span class="nn">argo.read_data</span> <span class="kn">import</span> <span class="n">DataReader</span>
+<span class="kn">from</span> <span class="nn">argo.simility_requests</span> <span class="kn">import</span> <span class="n">ReturnPipelineOutputDatatypes</span><span class="p">,</span> <span class="n">ReturnCassandraPipelineOutputMapping</span><span class="p">,</span> <span class="n">ReturnRuleConditionsFromSimility</span><span class="p">,</span> <span class="n">ReturnRuleConfigsFromSimility</span><span class="p">,</span> <span class="n">UpdateRulesInSimility</span>
+<span class="kn">from</span> <span class="nn">argo.rule_optimisation</span> <span class="kn">import</span> <span class="n">RuleOptimiser</span><span class="p">,</span> <span class="n">AlertsPerDay</span>
+<span class="kn">from</span> <span class="nn">argo.rules</span> <span class="kn">import</span> <span class="n">Rules</span>
+<span class="kn">from</span> <span class="nn">argo.correlation_reduction</span> <span class="kn">import</span> <span class="n">AgglomerativeClusteringFeatureReduction</span><span class="p">,</span> <span class="n">JaccardSimilarity</span>
+<span class="kn">from</span> <span class="nn">argo.rule_filtering</span> <span class="kn">import</span> <span class="n">FilterRules</span><span class="p">,</span> <span class="n">FilterCorrelatedRules</span>
+<span class="kn">from</span> <span class="nn">argo.system_config_generation</span> <span class="kn">import</span> <span class="n">UpdateExistingConfigs</span>
+<span class="kn">from</span> <span class="nn">argo.rule_application</span> <span class="kn">import</span> <span class="n">ArgoRuleApplier</span><span class="p">,</span> <span class="n">SimRuleApplier</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+</div>
+<div class="section" id="Read/process-data">
+<h2>Read/process data<a class="headerlink" href="#Read/process-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Read-in-data">
+<h3>Read in data<a class="headerlink" href="#Read-in-data" title="Permalink to this headline">¶</a></h3>
+<p>Note: If using the in-built APIs in ARGO to update rules in the system, it’s important that the datatypes used in the data align to the Cassandra datatypes in the system. For this, use the <em>read_data</em> module (not that if this isn’t required, you can use Panda’s standard reading methods).</p>
+<p>First, you need to set the password you use to log in to the Simility environment:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">set_password</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Please provide your password for logging into the Simility platform:  ·········
+</pre></div></div>
+</div>
+<p>Now let’s define some credential-related variables (as these are used in multiple classes throughout the example):</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://sim-ds.us-central1.gcp.dev.paypalinc.com&#39;</span>
+<span class="n">app_prefix</span> <span class="o">=</span> <span class="s1">&#39;james_testing&#39;</span>
+<span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;james@simility.com&#39;</span>
+<span class="n">base_entity</span> <span class="o">=</span> <span class="s1">&#39;transaction&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>Now we can use the <em>DataReader</em> class from the <em>read_data</em> module to read in the raw, unlabelled dummy pipeline output data (stored as a CSV file). <strong>Note that the CSV should not contain duplicate records</strong>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                <span class="n">app_prefix</span><span class="o">=</span><span class="n">app_prefix</span><span class="p">,</span>
+                <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+                <span class="n">base_entity</span><span class="o">=</span><span class="n">base_entity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;dummy_data/dummy_pipeline_output_data_unlabelled.csv&#39;</span><span class="p">,</span>
+                   <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;eid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(13276, 63)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Process-the-data">
+<h3>Process the data<a class="headerlink" href="#Process-the-data" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Train/test-split">
+<h4>Train/test split<a class="headerlink" href="#Train/test-split" title="Permalink to this headline">¶</a></h4>
+<p>Before applying any data processing steps, we should split the data into training and test sets:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+</div>
+</div>
+</div>
+<div class="section" id="Rule-Optimisation">
+<h2>Rule Optimisation<a class="headerlink" href="#Rule-Optimisation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Setting-rule-optimisation-function">
+<h3>Setting rule optimisation function<a class="headerlink" href="#Setting-rule-optimisation-function" title="Permalink to this headline">¶</a></h3>
+<p>For rule optimisation, you’ll need to specify the optimisation function (which calculates a metric which the algorithm optimises for each rule). Here we’re using the <em>.fit()</em> method from the <em>AlertsPerDay</em> class, which calculates the negative squared difference between the daily number of records a rule flags vs the targetted daily number of records flagged. This means that when the rule optimiser comes to maximise this metric, it will try to minimise the difference between the actual number of
+records flagged and the targetted number of records flagged.</p>
+<p>See the <em>optimisation_functions_example</em> example notebook in the <em>rule_optimisation</em> sub-package for more information on additional optimisation functions that can be used on unlabelled datasets.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">apd</span> <span class="o">=</span> <span class="n">AlertsPerDay</span><span class="p">(</span><span class="n">n_alerts_expected_per_day</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">no_of_days_in_file</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now we can optimise rules which currently reside in the Simility environment. This process involves the following steps:</p>
+<ol class="arabic simple">
+<li><p>Fetch the system rule conditions from the Simility environment.</p></li>
+<li><p>Convert these conditions into an ARGO-readable format.</p></li>
+<li><p>Optimise the thresholds of these rules.</p></li>
+<li><p>Visualise the performance uplift.</p></li>
+<li><p>Apply the optimised rules to the dataset.</p></li>
+<li><p>Get the binary columns for the un-optimised rules</p></li>
+</ol>
+</div>
+<div class="section" id="1.-Fetch-the-rule-conditions-from-the-Simility-environment">
+<h3>1. Fetch the rule conditions from the Simility environment<a class="headerlink" href="#1.-Fetch-the-rule-conditions-from-the-Simility-environment" title="Permalink to this headline">¶</a></h3>
+<p>To pull the system rule conditions, we’ll use the <em>return_rule_conditions_from_simility</em> module in the <em>simility_requests</em> sub-package:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rrc</span> <span class="o">=</span> <span class="n">ReturnRuleConditionsFromSimility</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                                       <span class="n">app_prefix</span><span class="o">=</span><span class="n">app_prefix</span><span class="p">,</span>
+                                       <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+                                       <span class="n">entity</span><span class="o">=</span><span class="n">base_entity</span><span class="p">,</span>
+                                       <span class="n">keep_active_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">orig_sys_conditions</span> <span class="o">=</span> <span class="n">rrc</span><span class="o">.</span><span class="n">request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Outputs">
+<h4>Outputs<a class="headerlink" href="#Outputs" title="Permalink to this headline">¶</a></h4>
+<p>The <em>.request()</em> method returns a dictionary of the system rule names (keys) and their conditions (values).</p>
+</div>
+</div>
+<div class="section" id="2.-Convert-rule-conditions-into-an-ARGO-readable-format">
+<h3>2. Convert rule conditions into an ARGO-readable format<a class="headerlink" href="#2.-Convert-rule-conditions-into-an-ARGO-readable-format" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have the system rule conditions, we need to convert them to an ARGO-readable format. To do this, we’ll use the <em>rules</em> module - this module allows us to define a set of rules using a given format, then convert this rule set to a difference format. In this case, we’ll be converting from the system-ready format to the standard ARGO lambda expression format.</p>
+<p>The standard ARGO lambda expression format allows new values to be injected into the condition string of a rule. This means that the rule’s performance can be evaluated with new values (which is used in the Rule Optimisation step).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_rules</span> <span class="o">=</span> <span class="n">Rules</span><span class="p">(</span><span class="n">system_dicts</span><span class="o">=</span><span class="n">orig_sys_conditions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_lambdas</span> <span class="o">=</span> <span class="n">system_rules</span><span class="o">.</span><span class="n">as_rule_lambdas</span><span class="p">(</span><span class="n">as_numpy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_kwargs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/jlaidler/venvs/argov2/lib/python3.7/site-packages/rules/convert_system_dicts_to_rule_dicts.py:79: UserWarning: JavaEL : Operator `java_el` is not currently supported in ARGO. Rule cannot be parsed.
+  warnings.warn(f&#39;{rule_name} : {e}&#39;)
+</pre></div></div>
+</div>
+<p><strong>Note that there may be rules which could not be converted into the standard ARGO lambda expression format, as they contain unsupported operators. The list of rule names that could not be converted are stored in the class attribute unparsed_rules:</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_rules</span><span class="o">.</span><span class="n">unparsed_rules</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;JavaEL&#39;]
+</pre></div></div>
+</div>
+<div class="section" id="id1">
+<h4>Outputs<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>The <em>.as_rule_lambdas()</em> method returns a dictionary of the set of rules defined using the standard ARGO lambda expression format (values) and their names (keys). It also saves this dictionary as the class attribute <em>rule_lambdas</em>.</p>
+<p>Three useful attributes created by running the <em>.as_rule_lambdas()</em> method are:</p>
+<ul class="simple">
+<li><p>lambda_kwargs (dict): For each rule (keys), a dictionary containing the features used in the rule (keys) and the current values (values). <strong>Only populates when .as_rule_lambdas() is used with the keyword argument with_kwargs=True.</strong></p></li>
+<li><p>lambda_args (dict): For each rule (keys), a list containing the current values used in the rule. <strong>Only populates when .as_rule_lambdas() is used with the keyword argument with_kwargs=False.</strong></p></li>
+<li><p>rule_features (dict): For each rule (keys), a list containing the features used in the rule. <strong>Only populates when .as_rule_lambdas() is used with the keyword argument with_kwargs=False.</strong></p></li>
+<li><p>unparsed_rules (list): List of rules which could not be parsed to an ARGO-ready format (due to unsupported operators).</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="3.-Optimise-the-thresholds-of-these-rules">
+<h3>3. Optimise the thresholds of these rules<a class="headerlink" href="#3.-Optimise-the-thresholds-of-these-rules" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note that rules containing a high number of contains operators can take longer to optimise.</strong></p>
+<p>Now that we have the system rules stored in the standard ARGO lambda expression format, we can feed these into the Rule Optimiser to optimise their thresholds:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_opt</span> <span class="o">=</span> <span class="n">RuleOptimiser</span><span class="p">(</span><span class="n">rule_lambdas</span><span class="o">=</span><span class="n">system_lambdas</span><span class="p">,</span>
+                           <span class="n">lambda_kwargs</span><span class="o">=</span><span class="n">system_rules</span><span class="o">.</span><span class="n">lambda_kwargs</span><span class="p">,</span>
+                           <span class="n">opt_func</span><span class="o">=</span><span class="n">apd</span><span class="o">.</span><span class="n">fit</span><span class="p">,</span>
+                           <span class="n">n_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_rule_strings</span> <span class="o">=</span> <span class="n">system_opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 30/30 [00:00&lt;00:00, 180.71trial/s, best loss: 0.09000000000000043]
+100%|██████████| 30/30 [00:00&lt;00:00, 497.99trial/s, best loss: 0.489999999999999]
+100%|██████████| 30/30 [00:00&lt;00:00, 200.09trial/s, best loss: 0.009999999999999929]
+100%|██████████| 30/30 [00:00&lt;00:00, 562.50trial/s, best loss: 57.76]
+100%|██████████| 30/30 [00:00&lt;00:00, 252.38trial/s, best loss: 1.0]
+100%|██████████| 30/30 [00:00&lt;00:00, 211.69trial/s, best loss: 7.290000000000001]
+100%|██████████| 30/30 [00:00&lt;00:00, 378.26trial/s, best loss: 25.0]
+100%|██████████| 30/30 [00:00&lt;00:00, 188.79trial/s, best loss: 67.24]
+100%|██████████| 30/30 [00:00&lt;00:00, 198.73trial/s, best loss: 0.3599999999999996]
+100%|██████████| 30/30 [00:00&lt;00:00, 224.72trial/s, best loss: 22.090000000000003]
+100%|██████████| 30/30 [00:00&lt;00:00, 140.57trial/s, best loss: 29.160000000000004]
+100%|██████████| 30/30 [00:00&lt;00:00, 181.81trial/s, best loss: 37.209999999999994]
+100%|██████████| 30/30 [00:00&lt;00:00, 188.14trial/s, best loss: 26.009999999999998]
+100%|██████████| 30/30 [00:00&lt;00:00, 187.24trial/s, best loss: 12.25]
+100%|██████████| 30/30 [00:00&lt;00:00, 214.08trial/s, best loss: 96.04000000000002]
+100%|██████████| 30/30 [00:00&lt;00:00, 199.99trial/s, best loss: 33.64]
+100%|██████████| 30/30 [00:00&lt;00:00, 284.10trial/s, best loss: 3.2400000000000024]
+100%|██████████| 30/30 [00:00&lt;00:00, 165.86trial/s, best loss: 0.6400000000000011]
+100%|██████████| 30/30 [00:00&lt;00:00, 182.61trial/s, best loss: 0.039999999999999716]
+100%|██████████| 30/30 [00:00&lt;00:00, 149.10trial/s, best loss: 1.0]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Outputs<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The <em>.fit()</em> method returns a dictionary of optimised rules stored in the standard ARGO string format (values) and their names (keys)</p>
+<p>Useful attributes created by running the <em>.fit()</em> method are:</p>
+<ul class="simple">
+<li><p>opt_rule_strings (dict): The optimised rules stored in the standard ARGO string format (values) and their names (keys).</p></li>
+<li><p>rule_names_missing_features (list): Names of rules which use features that are not present in the dataset (and therefore can’t be optimised or applied).</p></li>
+<li><p>rule_names_no_opt_conditions (list): Names of rules which have no optimisable conditions (e.g. rules that only contain string-based conditions).</p></li>
+<li><p>rule_names_zero_var_features (list): Names of rules which exclusively contain zero variance features (based on <em>X</em>), so cannot be optimised.</p></li>
+<li><p>rules (object): Class containing the optimised rules stored in the standard ARGO string format. Methods from this class can be used to convert the rules into the standard ARGO dictionary or lambda expression representations. See the rules module for more information.</p></li>
+<li><p>opt_rule_performances (dict): The optimisation metric (values) calculated for each optimised rule (keys).</p></li>
+<li><p>orig_rule_performances (dict): The optimisation metric (values) calculated for each original rule (keys).</p></li>
+</ul>
+</div>
+<div class="section" id="4.-Visualise-the-performance-uplift">
+<h3>4. Visualise the performance uplift<a class="headerlink" href="#4.-Visualise-the-performance-uplift" title="Permalink to this headline">¶</a></h3>
+<p>We can visualise the performance uplift of the optimised rules using the <em>.plot_performance_uplift()</em> and <em>.plot_performance_uplift_distribution()</em> methods:</p>
+<ul class="simple">
+<li><p><em>.plot_performance_uplift()</em>: Generates a scatterplot showing the performance of each rule before and after optimisation.</p></li>
+<li><p><em>.plot_performance_uplift_distribution()</em>: Generates a boxplot showing the distribution of performance uplifts (original rules vs optimised rules).</p></li>
+</ul>
+<div class="section" id="On-the-training-set">
+<h4>On the training set<a class="headerlink" href="#On-the-training-set" title="Permalink to this headline">¶</a></h4>
+<p>To visualise the uplift on the training set, we can use the class attributes <em>orig_rule_performances</em> and <em>opt_rule_performances</em> in the plotting methods, as these were generated as part of the optimisation process:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_opt</span><span class="o">.</span><span class="n">plot_performance_uplift</span><span class="p">(</span><span class="n">orig_rule_performances</span><span class="o">=</span><span class="n">system_opt</span><span class="o">.</span><span class="n">orig_rule_performances</span><span class="p">,</span>
+                                   <span class="n">opt_rule_performances</span><span class="o">=</span><span class="n">system_opt</span><span class="o">.</span><span class="n">opt_rule_performances</span><span class="p">,</span>
+                                   <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/argo_unlabelled_example_54_0.png" src="_images/argo_unlabelled_example_54_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_opt</span><span class="o">.</span><span class="n">plot_performance_uplift_distribution</span><span class="p">(</span><span class="n">orig_rule_performances</span><span class="o">=</span><span class="n">system_opt</span><span class="o">.</span><span class="n">orig_rule_performances</span><span class="p">,</span>
+                                                <span class="n">opt_rule_performances</span><span class="o">=</span><span class="n">system_opt</span><span class="o">.</span><span class="n">opt_rule_performances</span><span class="p">,</span>
+                                                <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/argo_unlabelled_example_55_0.png" src="_images/argo_unlabelled_example_55_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="On-the-test-set">
+<h4>On the test set<a class="headerlink" href="#On-the-test-set" title="Permalink to this headline">¶</a></h4>
+<p>To visualise the uplift on the test set, we first need to generate the <em>orig_rule_performances</em> and <em>opt_rule_performances</em> parameters used in the plotting methods as these aren’t created as part of the optimisation process. To do this, we need to apply both the original rules and the optimised rules to the test set. <strong>Note that before we apply the original rules, we need to remove those containing features that are missing in X_train:</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Original rules</span>
+<span class="n">system_rules</span><span class="o">.</span><span class="n">filter_rules</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="n">system_opt</span><span class="o">.</span><span class="n">rule_names_missing_features</span><span class="p">)</span>
+<span class="n">orig_sys_rule_strings</span> <span class="o">=</span> <span class="n">system_rules</span><span class="o">.</span><span class="n">as_rule_strings</span><span class="p">(</span><span class="n">as_numpy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">orig_ra</span> <span class="o">=</span> <span class="n">ArgoRuleApplier</span><span class="p">(</span><span class="n">rule_strings</span><span class="o">=</span><span class="n">orig_sys_rule_strings</span><span class="p">,</span>
+                          <span class="n">opt_func</span><span class="o">=</span><span class="n">apd</span><span class="o">.</span><span class="n">fit</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">orig_ra</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">orig_rule_performances_test</span> <span class="o">=</span> <span class="n">orig_ra</span><span class="o">.</span><span class="n">rule_descriptions</span><span class="p">[</span><span class="s1">&#39;OptMetric&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/jlaidler/venvs/argov2/lib/python3.7/site-packages/rules/convert_system_dicts_to_rule_dicts.py:79: UserWarning: JavaEL : Operator `java_el` is not currently supported in ARGO. Rule cannot be parsed.
+  warnings.warn(f&#39;{rule_name} : {e}&#39;)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Optimised rules</span>
+<span class="n">opt_ra</span> <span class="o">=</span> <span class="n">ArgoRuleApplier</span><span class="p">(</span><span class="n">rule_strings</span><span class="o">=</span><span class="n">opt_rule_strings</span><span class="p">,</span>
+                         <span class="n">opt_func</span><span class="o">=</span><span class="n">apd</span><span class="o">.</span><span class="n">fit</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">opt_ra</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">opt_rule_performances_test</span> <span class="o">=</span> <span class="n">opt_ra</span><span class="o">.</span><span class="n">rule_descriptions</span><span class="p">[</span><span class="s1">&#39;OptMetric&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_opt</span><span class="o">.</span><span class="n">plot_performance_uplift</span><span class="p">(</span><span class="n">orig_rule_performances</span><span class="o">=</span><span class="n">orig_rule_performances_test</span><span class="p">,</span>
+                                   <span class="n">opt_rule_performances</span><span class="o">=</span><span class="n">opt_rule_performances_test</span><span class="p">,</span>
+                                   <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/argo_unlabelled_example_60_0.png" src="_images/argo_unlabelled_example_60_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_opt</span><span class="o">.</span><span class="n">plot_performance_uplift_distribution</span><span class="p">(</span><span class="n">orig_rule_performances</span><span class="o">=</span><span class="n">orig_rule_performances_test</span><span class="p">,</span>
+                                                <span class="n">opt_rule_performances</span><span class="o">=</span><span class="n">opt_rule_performances_test</span><span class="p">,</span>
+                                                <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/argo_unlabelled_example_61_0.png" src="_images/argo_unlabelled_example_61_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="5.-Apply-the-optimised-rules-to-the-dataset">
+<h3>5. Apply the optimised rules to the dataset<a class="headerlink" href="#5.-Apply-the-optimised-rules-to-the-dataset" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have the optimised rules, we can apply them to the dataset:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_opt_sys_train</span> <span class="o">=</span> <span class="n">system_opt</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Outputs<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>The <em>.apply()</em> method returns a dataframe giving the binary columns of the rules as applied to the given dataset.</p>
+<p>A useful attribute created by running the <em>.apply()</em> method is:</p>
+<ul class="simple">
+<li><p>rule_descriptions: A dataframe showing the logic of the optimised rules and their performance metrics as applied to the given dataset.</p></li>
+</ul>
+</div>
+<div class="section" id="6.-Get-the-binary-columns-for-the-un-optimised-rules">
+<h3>6. Get the binary columns for the un-optimised rules<a class="headerlink" href="#6.-Get-the-binary-columns-for-the-un-optimised-rules" title="Permalink to this headline">¶</a></h3>
+<p>For the rules which either:</p>
+<ol class="arabic simple">
+<li><p>ARGO couldn’t convert into the standard ARGO lambda expression format, or;</p></li>
+<li><p>ARGO couldn’t apply to the dataset due to missing features</p></li>
+</ol>
+<p>we can use the <em>SimRuleApplier</em> class from the <em>rule_application</em> sub-package to apply these rules to a dataset and get their performance, using the <em>sim_ll</em> column:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rules_cannot_be_applied</span> <span class="o">=</span> <span class="n">system_rules</span><span class="o">.</span><span class="n">unparsed_rules</span> <span class="o">+</span> <span class="n">system_opt</span><span class="o">.</span><span class="n">rule_names_missing_features</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sra</span> <span class="o">=</span> <span class="n">SimRuleApplier</span><span class="p">(</span><span class="n">opt_func</span><span class="o">=</span><span class="n">apd</span><span class="o">.</span><span class="n">fit</span><span class="p">,</span> <span class="n">sim_ll_column</span><span class="o">=</span><span class="s1">&#39;sim_ll&#39;</span><span class="p">,</span> <span class="n">rules</span><span class="o">=</span><span class="n">rules_cannot_be_applied</span><span class="p">)</span>
+<span class="n">X_rules_unopt_sys_train</span> <span class="o">=</span> <span class="n">sra</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/jlaidler/venvs/argov2/lib/python3.7/site-packages/pandas/core/series.py:4535: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  downcast=downcast,
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Outputs<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>The <em>.apply()</em> method returns a dataframe giving the binary columns of the rules as applied to the given dataset.</p>
+<p>A useful attribute created by running the <em>.apply()</em> method is:</p>
+<ul class="simple">
+<li><p>rule_descriptions: A dataframe showing the logic of the rules and their performance metrics as applied to the given dataset.</p></li>
+<li><p>rules_not_in_sim_ll: List of rule names that were provided in the <em>rules</em> class constructor parameter but could not be found in the <em>sim_ll</em> column.</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="Identify-uneccessary-rules">
+<h2>Identify uneccessary rules<a class="headerlink" href="#Identify-uneccessary-rules" title="Permalink to this headline">¶</a></h2>
+<p>We now have two sets of rules:</p>
+<ol class="arabic simple">
+<li><p>Optimised system rules</p></li>
+<li><p>Unoptimised system rules</p></li>
+</ol>
+<p>We can combine these rules, then apply correlation reduction and filtering methods to remove those which are unneccesary. To do this, we’ll use the binary columns and the performance dataframes of the rules.</p>
+<div class="section" id="Combine-binary-columns-and-performance-dataframes-of-rules">
+<h3>Combine binary columns and performance dataframes of rules<a class="headerlink" href="#Combine-binary-columns-and-performance-dataframes-of-rules" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_rules_opt_sys_train</span><span class="p">,</span> <span class="n">X_rules_unopt_sys_train</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rule_descriptions_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">system_opt</span><span class="o">.</span><span class="n">rule_descriptions</span><span class="p">,</span> <span class="n">sra</span><span class="o">.</span><span class="n">rule_descriptions</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">rule_descriptions_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((8894, 21), (21, 4))
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Standard-filter">
+<h3>Standard filter<a class="headerlink" href="#Standard-filter" title="Permalink to this headline">¶</a></h3>
+<p>We can use the <em>FilterRules</em> class from the <em>rule_filters</em> module to filter out rules whose performance is below a desired threshold. In this example, we’ll filter out rules with a negative squared difference between the daily number of records a rule flags vs the targetted daily number of records flagged below -70. Let’s first set up our filters - <strong>note that we use the key ‘OptMetric’ for this metric (since this is the metric that we used to optimise the rules):</strong></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">filters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;OptMetric&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Operator&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">70</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Now we can instantiate the <em>FilterRules</em> class and run the <em>fit_transform()</em> method to remove the rules which do not meet the filter requirements and apply the filtered rule set to the dataset:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fr</span> <span class="o">=</span> <span class="n">FilterRules</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="n">rule_descriptions</span><span class="o">=</span><span class="n">rule_descriptions_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_train</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_rules</span><span class="o">=</span><span class="n">X_rules_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h4>Outputs<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>The <em>.fit_transform()</em> method returns a dataframe containing the filtered rule binary columns. It also creates the following useful attributes:</p>
+<ul class="simple">
+<li><p>rules_to_keep (list): List of rules which remain after the filters have been applied.</p></li>
+<li><p>rule_descriptions (pd.DataFrame): The standard performance metrics dataframe associated with the filtered rules.</p></li>
+</ul>
+<p>We can assign the <em>rule_descriptions</em> dataframe from the class to our variable, ensuring that the filtered rules are removed from the dataframe:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rule_descriptions_train</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">rule_descriptions</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">rule_descriptions_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((8894, 20), (20, 4))
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="Remove-correlated-rules">
+<h3>Remove correlated rules<a class="headerlink" href="#Remove-correlated-rules" title="Permalink to this headline">¶</a></h3>
+<p>We can use the <em>FilterCorrelatedRules</em> class from the <em>rule_filters</em> module along with a correlation reduction class to remove correlated rules - see the <em>correlation_reduction_methods</em> module in the <em>correlation_reduction</em> sub-package for more information on these classes.</p>
+<p>In this example, we’ll be using the <em>AgglomerativeClusteringFeatureReduction</em> class from that module. To instantiate this class, we also need to define a similarity function - see the <em>similarity_functions</em> module in the <em>correlation_reduction</em> sub-package for more information. In this example, we’ll use the Jaccard similarity:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">js</span> <span class="o">=</span> <span class="n">JaccardSimilarity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">acfr</span> <span class="o">=</span> <span class="n">AgglomerativeClusteringFeatureReduction</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                                               <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;bottom_up&#39;</span><span class="p">,</span>
+                                               <span class="n">similarity_function</span><span class="o">=</span><span class="n">js</span><span class="o">.</span><span class="n">fit</span><span class="p">,</span>
+                                               <span class="n">columns_performance</span><span class="o">=</span><span class="n">rule_descriptions_train</span><span class="p">[</span><span class="s1">&#39;OptMetric&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Now we can instantiate the <em>FilterCorrelatedRules</em> class, and run the <em>fit_transform()</em> method to remove correlated rules and apply the filtered rule set to the dataset:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fcr</span> <span class="o">=</span> <span class="n">FilterCorrelatedRules</span><span class="p">(</span><span class="n">correlation_reduction_class</span><span class="o">=</span><span class="n">acfr</span><span class="p">,</span>
+                            <span class="n">rule_descriptions</span><span class="o">=</span><span class="n">rule_descriptions_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_train</span> <span class="o">=</span> <span class="n">fcr</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_rules</span><span class="o">=</span><span class="n">X_rules_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h4>Outputs<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p>The <em>.fit_transform()</em> method returns a dataframe containing the binary columns of the uncorrelated rules. It also creates the following useful attributes:</p>
+<ul class="simple">
+<li><p>rules_to_keep (list): List of rules which remain after the correlation reduction has been applied.</p></li>
+<li><p>rule_descriptions (pd.DataFrame): The standard performance metrics dataframe associated with the uncorrelated rules.</p></li>
+</ul>
+<p>We can assign the <em>rule_descriptions</em> dataframe from the class to our variable, ensuring that the correlated rules are removed from the dataframe:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rule_descriptions_train</span> <span class="o">=</span> <span class="n">fcr</span><span class="o">.</span><span class="n">rule_descriptions</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">rule_descriptions_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((8894, 14), (14, 4))
+</pre></div></div>
+</div>
+<hr class="docutils" />
+</div>
+</div>
+</div>
+<div class="section" id="Remove-filtered-rules-from-rule-set">
+<h2>Remove filtered rules from rule set<a class="headerlink" href="#Remove-filtered-rules-from-rule-set" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our final rule set, we can remove the filtered rules from each of our rule set (which are saved in the <em>rules</em> attribute in our rule optimiser class):</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">final_rule_names</span> <span class="o">=</span> <span class="n">X_rules_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">system_opt</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">filter_rules</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="n">final_rule_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We also need to remove the filtered rules from the original list of unparsed rules. To do this, we’ll use a simple list comprehension:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">final_rules_cannot_be_applied</span> <span class="o">=</span> <span class="p">[</span><span class="n">rule_name</span> <span class="k">for</span> <span class="n">rule_name</span> <span class="ow">in</span> <span class="n">rules_cannot_be_applied</span> <span class="k">if</span> <span class="n">rule_name</span> <span class="ow">in</span> <span class="n">final_rule_names</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">system_opt</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">rule_strings</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">final_rules_cannot_be_applied</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(13, 1)
+</pre></div></div>
+</div>
+<hr class="docutils" />
+</div>
+<div class="section" id="Test-final-rule-set">
+<h2>Test final rule set<a class="headerlink" href="#Test-final-rule-set" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our final rule set, we can apply these to the test set to ensure they perform as expected.</p>
+<div class="section" id="Apply-rules">
+<h3>Apply rules<a class="headerlink" href="#Apply-rules" title="Permalink to this headline">¶</a></h3>
+<p>First, we apply the rules themselves. Since we have a combination of optimised and unparsed rules, we need to apply them separately.</p>
+<div class="section" id="Optimised-rules">
+<h4>Optimised rules<a class="headerlink" href="#Optimised-rules" title="Permalink to this headline">¶</a></h4>
+<p>Again, we apply the rules by using the <em>rule_strings</em> attribute (which correponds to the optimised rules stored in the standard ARGO-string format) from the rule optimiser class:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ara_opt</span> <span class="o">=</span> <span class="n">ArgoRuleApplier</span><span class="p">(</span><span class="n">rule_strings</span><span class="o">=</span><span class="n">system_opt</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">rule_strings</span><span class="p">,</span> <span class="n">opt_func</span><span class="o">=</span><span class="n">apd</span><span class="o">.</span><span class="n">fit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_opt_test</span> <span class="o">=</span> <span class="n">ara_opt</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Unoptimised-rules">
+<h4>Unoptimised rules<a class="headerlink" href="#Unoptimised-rules" title="Permalink to this headline">¶</a></h4>
+<p>In this case, we pass the list of final unparsed rules to the <em>SimRuleApplier</em> class:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sra</span> <span class="o">=</span> <span class="n">SimRuleApplier</span><span class="p">(</span><span class="n">opt_func</span><span class="o">=</span><span class="n">apd</span><span class="o">.</span><span class="n">fit</span><span class="p">,</span> <span class="n">sim_ll_column</span><span class="o">=</span><span class="s1">&#39;sim_ll&#39;</span><span class="p">,</span> <span class="n">rules</span><span class="o">=</span><span class="n">final_rules_cannot_be_applied</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_rules_unopt_sys_test</span> <span class="o">=</span> <span class="n">sra</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/jlaidler/venvs/argov2/lib/python3.7/site-packages/pandas/core/series.py:4535: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  downcast=downcast,
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h4>Outputs<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>The <em>.apply()</em> method returns a dataframe giving the binary columns of the rules as applied to the given dataset.</p>
+<p>A useful attribute created by running the <em>.apply()</em> method is:</p>
+<ul class="simple">
+<li><p>rule_descriptions: A dataframe showing the logic of the generated rules and their performance metrics as applied to the given dataset.</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+</div>
+<div class="section" id="Update-the-system-ready-configs-of-the-rules">
+<h2>Update the system-ready configs of the rules<a class="headerlink" href="#Update-the-system-ready-configs-of-the-rules" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our final system-ready rule set, we can generate system-ready configs for the rules. How we do this depends on the type of rule:</p>
+<ul class="simple">
+<li><p>Optimised system rules: We use the <em>UpdateExistingConfigs</em> class from the <em>update_existing_configs</em> module in the <em>system_config_generation</em> sub-package to update the threshold values of the existing system-ready JSON configs.</p></li>
+<li><p>Unoptimised rules: We don’t have to do anything here, since we haven’t updated the thresholds of these rules.</p></li>
+<li><p>Inactivate system rules no longer required: We use the <em>UpdateExistingConfigs</em> class from the <em>update_existing_configs</em> module in the <em>system_config_generation</em> sub-package to update the status of the system rules that were originally active in the system, but have now been deemed unnecessary (either due to being correlated or poorly performing):</p></li>
+</ul>
+<p>Before we can instatiate the <em>UpdateExistingConfigs</em> class, we need to get the Cassandra datatypes and field names for each pipeline output field used in the rule set. To do this, we can use the <em>ReturnPipelineOutputDatatypes</em> and <em>ReturnCassandraPipelineOutputMapping</em> classes from the <em>cassandra_requests</em> module in the <em>simility_requests</em> sub-package:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rpodt</span> <span class="o">=</span> <span class="n">ReturnPipelineOutputDatatypes</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                                      <span class="n">app_prefix</span><span class="o">=</span><span class="n">app_prefix</span><span class="p">,</span>
+                                      <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+                                      <span class="n">base_entity</span><span class="o">=</span><span class="n">base_entity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">po_dtypes</span> <span class="o">=</span> <span class="n">rpodt</span><span class="o">.</span><span class="n">request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rcpom</span> <span class="o">=</span> <span class="n">ReturnCassandraPipelineOutputMapping</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                                             <span class="n">app_prefix</span><span class="o">=</span><span class="n">app_prefix</span><span class="p">,</span>
+                                             <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+                                             <span class="n">base_entity</span><span class="o">=</span><span class="n">base_entity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">cassandra_field_names</span> <span class="o">=</span> <span class="n">rcpom</span><span class="o">.</span><span class="n">request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>Optimised rules<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>Before we can instatiate the <em>UpdateExistingConfigs</em> class, we need to get the original rule configurations from the Simility environment, so that the conditions can be updated within the configurations. To do this, we can use the <em>ReturnRuleConfigsFromSimility</em> class from the <em>rule_requests</em> module in the <em>simility_requests</em> sub-package:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rrcfs</span> <span class="o">=</span> <span class="n">ReturnRuleConfigsFromSimility</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                                      <span class="n">app_prefix</span><span class="o">=</span><span class="n">app_prefix</span><span class="p">,</span>
+                                      <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+                                      <span class="n">entity</span><span class="o">=</span><span class="n">base_entity</span><span class="p">,</span>
+                                      <span class="n">rules</span><span class="o">=</span><span class="n">system_opt</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">rule_strings</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                                     <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_rules_sys_configs</span> <span class="o">=</span> <span class="n">rrcfs</span><span class="o">.</span><span class="n">request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>We can use the Cassandra datatypes and field names for each pipeline output field (generated in the previous step) to convert the conditions of the optimised rules into the system-ready format:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">final_opt_rules_sys_dicts</span> <span class="o">=</span> <span class="n">system_opt</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">as_system_dicts</span><span class="p">(</span><span class="n">field_datatypes</span><span class="o">=</span><span class="n">po_dtypes</span><span class="p">,</span>
+                                                             <span class="n">cassandra_field_names</span><span class="o">=</span><span class="n">cassandra_field_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now that we have the original configurations and the optimised rule coniditions in the system-ready format, we can update the configurations to reflect the optimised thresholds:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">uec</span> <span class="o">=</span> <span class="n">UpdateExistingConfigs</span><span class="p">(</span><span class="n">rule_configs</span><span class="o">=</span><span class="n">opt_rules_sys_configs</span><span class="p">,</span>
+                            <span class="n">updated_conditions</span><span class="o">=</span><span class="n">final_opt_rules_sys_dicts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">final_opt_rule_configs</span> <span class="o">=</span> <span class="n">uec</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h4>Outputs<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p>The <em>.update()</em> method returns a dictionary of the updated system-ready JSON configurations for each rule. It also saves this dictionary as the class attribute <em>updated_rule_configs</em>. These configurations can be used with the <em>update_rules_in_simility</em> module in the <em>simility_requests</em> sub-package to update the provided rules in a given Simility instance.</p>
+</div>
+</div>
+<div class="section" id="System-rules-no-longer-required">
+<h3>System rules no longer required<a class="headerlink" href="#System-rules-no-longer-required" title="Permalink to this headline">¶</a></h3>
+<p>Before we can instatiate the <em>UpdateExistingConfigs</em> class, we need to know which system rules were in the original set that were fetched for the rule optimisation process, that are no longer in the final set of rules. To do this, we can iterate through the original rule names and check for those that aren’t present in either the final optimised rule set or the final unparsed rule set:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sys_rules_inactivate</span> <span class="o">=</span> <span class="p">[</span><span class="n">rule_name</span> <span class="k">for</span> <span class="n">rule_name</span> <span class="ow">in</span> <span class="n">orig_sys_conditions</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">rule_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">system_opt</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">rule_strings</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">rule_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">final_rules_cannot_be_applied</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Now that we have the list of rule names we need to inactivate, we can return their original configurations:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rrcfs</span> <span class="o">=</span> <span class="n">ReturnRuleConfigsFromSimility</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                                      <span class="n">app_prefix</span><span class="o">=</span><span class="n">app_prefix</span><span class="p">,</span>
+                                      <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+                                      <span class="n">entity</span><span class="o">=</span><span class="n">base_entity</span><span class="p">,</span>
+                                      <span class="n">rules</span><span class="o">=</span><span class="n">sys_rules_inactivate</span>
+                                     <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sys_rules_inactivate_configs</span> <span class="o">=</span> <span class="n">rrcfs</span><span class="o">.</span><span class="n">request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, we can update the configurations to reflect the change in status:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">uec</span> <span class="o">=</span> <span class="n">UpdateExistingConfigs</span><span class="p">(</span><span class="n">rule_configs</span><span class="o">=</span><span class="n">sys_rules_inactivate_configs</span><span class="p">,</span>
+                            <span class="n">make_inactive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">final_sys_rules_inactivate_configs</span> <span class="o">=</span> <span class="n">uec</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h4>Outputs<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<p>The <em>.update()</em> method returns a dictionary of the updated system-ready JSON configurations for each rule. It also saves this dictionary as the class attribute <em>updated_rule_configs</em>. These configurations can be used with the <em>update_rules_in_simility</em> module in the <em>simility_requests</em> sub-package to update the provided rules in a given Simility instance.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">final_opt_rule_configs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">final_sys_rules_inactivate_configs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(13, 7)
+</pre></div></div>
+</div>
+<hr class="docutils" />
+</div>
+</div>
+</div>
+<div class="section" id="Update-the-Simility-environment-with-the-final-rule-set">
+<h2>Update the Simility environment with the final rule set<a class="headerlink" href="#Update-the-Simility-environment-with-the-final-rule-set" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have the system-ready configurations for our optimised and inactivated rules, we can update the Simility environment with the final rule set. Note that we also need to inactivate the system rules that were originally active in the system, but have now been deemed uneccessary (either due to being correlated or poorly performing):</p>
+<div class="section" id="id11">
+<h3>Optimised rules<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[211]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">uris</span> <span class="o">=</span> <span class="n">UpdateRulesInSimility</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                             <span class="n">app_prefix</span><span class="o">=</span><span class="n">app_prefix</span><span class="p">,</span>
+                             <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[212]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">uris</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">rule_configs</span><span class="o">=</span><span class="n">final_opt_rule_configs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id12">
+<h3>System rules no longer required<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[223]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">uris</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">rule_configs</span><span class="o">=</span><span class="n">final_sys_rules_inactivate_configs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h4>Outputs<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<p>The <em>.request()</em> method does not return a value; however, once it has ran successfully, you should see the rules have been updated in the Simility environment specified.</p>
+<hr class="docutils" />
+</div>
+</div>
+</div>
+<div class="section" id="The-End">
+<h2>The End<a class="headerlink" href="#The-End" title="Permalink to this headline">¶</a></h2>
+<p>That’s it folks - if you have any queries or suggestions please put them in the <em>#sim-datatools-help</em> Slack channel or email James directly.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="argo.argo_utils.html" class="btn btn-neutral float-right" title="argo.argo_utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="argo_example.html" class="btn btn-neutral float-left" title="ARGO Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Simility Data Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

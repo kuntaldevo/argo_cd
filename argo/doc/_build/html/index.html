@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ARGO: Automated Rule Generation and Optimisation &mdash; ARGO  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="argo package" href="argo.html" />
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> ARGO
+          
+
+          
+            
+            <img src="_static/argo_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="argo.html">argo package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ARGO</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ARGO: Automated Rule Generation and Optimisation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="argo-automated-rule-generation-and-optimisation">
+<h1>ARGO: Automated Rule Generation and Optimisation<a class="headerlink" href="#argo-automated-rule-generation-and-optimisation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>ARGO is a fast, flexible and modular Python package for:</p>
+<ul class="simple">
+<li><p>Generating new fraud-capture rules using a labelled dataset.</p></li>
+<li><p>Optimising existing rules using a labelled or unlabelled dataset.</p></li>
+<li><p>Combining rule sets and removing/filtering those which are unnecessary.</p></li>
+<li><p>Generating rule scores based on their performance.</p></li>
+<li><p>Generating or updating existing system-ready configurations so that they can be updated in a Simility environment.</p></li>
+</ul>
+<p>It aims to help streamline the process for developing a final, deployment-ready rule set for a client. Each task within this process has been modularised into sub-packages, so that these can be installed and run independently.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://github.paypal.com/Simility-R/argo">https://github.paypal.com/Simility-R/argo</a> for steps on installing ARGO.</p>
+</div>
+<div class="section" id="package-documentation">
+<h2>Package documentation<a class="headerlink" href="#package-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The below links contain the following information for each package:</p>
+<ul class="simple">
+<li><p>Example notebooks showing how the package can be used.</p></li>
+<li><p>Docstrings for the classes, methods or functions within the package.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="argo.html">argo package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="argo.html#notebooks">Notebooks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="argo_example.html">ARGO Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo_unlabelled_example.html">ARGO Example (using an unlabelled dataset)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="argo.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="argo.argo_utils.html">argo.argo_utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.correlation_reduction.html">argo.correlation_reduction package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.read_data.html">argo.read_data package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_application.html">argo.rule_application package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_filtering.html">argo.rule_filtering package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_generation.html">argo.rule_generation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_optimisation.html">argo.rule_optimisation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rule_scoring.html">argo.rule_scoring package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.rules.html">argo.rules package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.simility_apis.html">argo.simility_apis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.simility_requests.html">argo.simility_requests package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argo.system_config_generation.html">argo.system_config_generation package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="argo.html" class="btn btn-neutral float-right" title="argo package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Simility Data Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

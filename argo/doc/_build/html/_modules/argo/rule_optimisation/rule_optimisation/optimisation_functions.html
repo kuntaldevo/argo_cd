@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>argo.rule_optimisation.rule_optimisation.optimisation_functions &mdash; ARGO  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link href="../../../../_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> ARGO
+          
+
+          
+            
+            <img src="../../../../_static/argo_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../argo.html">argo package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ARGO</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>argo.rule_optimisation.rule_optimisation.optimisation_functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for argo.rule_optimisation.rule_optimisation.optimisation_functions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Classes for calculating optimisation metrics&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">argo_utils.argo_utils</span> <span class="k">as</span> <span class="nn">argo_utils</span>
+
+
+<div class="viewcode-block" id="Precision"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.Precision">[docs]</a><span class="k">class</span> <span class="nc">Precision</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the Precision using Numpy&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Precision.fit"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.Precision.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">y_true</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+            <span class="n">y_pred</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+            <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the Precision using Numpy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            y_true (Union[np.array, pd.Series]): The target column.</span>
+<span class="sd">            y_pred (Union[np.array, pd.Series]): The binary predictor column.</span>
+<span class="sd">            sample_weight ([type], optional): Row-wise weights to apply. </span>
+<span class="sd">                Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The Precision score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="n">argo_utils</span><span class="o">.</span><span class="n">return_binary_pred_perf_of_set_numpy</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span>
+                                                                    <span class="n">y_preds</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span>
+                                                                    <span class="n">y_preds_columns</span><span class="o">=</span><span class="p">[</span>
+                                                                        <span class="s1">&#39;y_pred&#39;</span><span class="p">],</span>
+                                                                    <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Precision&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">precision</span></div></div>
+
+
+<div class="viewcode-block" id="Recall"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.Recall">[docs]</a><span class="k">class</span> <span class="nc">Recall</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the Recall using Numpy&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Recall.fit"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.Recall.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">y_true</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+            <span class="n">y_pred</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+            <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the Recall using Numpy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            y_true (Union[np.array, pd.Series]): The target column.</span>
+<span class="sd">            y_pred (Union[np.array, pd.Series]): The binary predictor column.</span>
+<span class="sd">            sample_weight ([type], optional): Row-wise weights to apply. </span>
+<span class="sd">                Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The Recall score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">recall</span> <span class="o">=</span> <span class="n">argo_utils</span><span class="o">.</span><span class="n">return_binary_pred_perf_of_set_numpy</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span>
+                                                                 <span class="n">y_preds</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span>
+                                                                 <span class="n">y_preds_columns</span><span class="o">=</span><span class="p">[</span>
+                                                                     <span class="s1">&#39;y_pred&#39;</span><span class="p">],</span>
+                                                                 <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Recall&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">recall</span></div></div>
+
+
+<div class="viewcode-block" id="FScore"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.FScore">[docs]</a><span class="k">class</span> <span class="nc">FScore</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the Fbeta score using Numpy&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            beta (float): The beta value used to calculate the Fbeta score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span>
+
+<div class="viewcode-block" id="FScore.fit"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.FScore.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">y_true</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+            <span class="n">y_pred</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+            <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the Fbeta score using Numpy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            y_true (Union[np.array, pd.Series]): The target column.</span>
+<span class="sd">            y_pred (Union[np.array, pd.Series]): The binary predictor column.</span>
+<span class="sd">            sample_weight ([type], optional): Row-wise weights to apply. </span>
+<span class="sd">                Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The Fbeta score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span> <span class="o">=</span> <span class="n">argo_utils</span><span class="o">.</span><span class="n">return_binary_pred_perf_of_set_numpy</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span>
+                                                                            <span class="n">y_preds</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span>
+                                                                            <span class="n">y_preds_columns</span><span class="o">=</span><span class="p">[</span>
+                                                                                <span class="s1">&#39;y_pred&#39;</span><span class="p">],</span>
+                                                                            <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][[</span><span class="s1">&#39;Precision&#39;</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">precision</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">recall</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fscore</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fscore</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span><span class="p">)</span> <span class="o">/</span>
+                                             <span class="p">((</span><span class="n">precision</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">recall</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">fscore</span></div></div>
+
+
+<div class="viewcode-block" id="Revenue"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.Revenue">[docs]</a><span class="k">class</span> <span class="nc">Revenue</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the revenue&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chargeback_multiplier</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            y_type (str): Dictates whether the binary target column flags fraud </span>
+<span class="sd">                (y_type = &#39;Fraud&#39;) or non-fraud (y_type = &#39;NonFraud&#39;).</span>
+<span class="sd">            chargeback_multiplier (int): Multiplier to apply to chargeback </span>
+<span class="sd">                transactions.            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Fraud&#39;</span><span class="p">,</span> <span class="s1">&#39;NonFraud&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;y_type must be either &quot;Fraud&quot; or &quot;NonFraud&quot;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_type</span> <span class="o">=</span> <span class="n">y_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chargeback_multiplier</span> <span class="o">=</span> <span class="n">chargeback_multiplier</span>
+
+<div class="viewcode-block" id="Revenue.fit"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.Revenue.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">y_true</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+            <span class="n">y_pred</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+            <span class="n">sample_weight</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the revenue.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            y_true (Union[np.array, pd.Series]): The target column.</span>
+<span class="sd">            y_pred (Union[np.array, pd.Series]): The binary predictor column.</span>
+<span class="sd">            sample_weight (Union[np.array, pd.Series]): Row-wise transaction </span>
+<span class="sd">                amounts to apply.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: Revenue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+            <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">)</span>
+        <span class="n">tps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_true</span> <span class="o">*</span> <span class="n">y_pred</span> <span class="o">*</span> <span class="n">sample_weight</span><span class="p">)</span>
+        <span class="n">tns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_true</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">sample_weight</span><span class="p">)</span>
+        <span class="n">fps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_true</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">y_pred</span> <span class="o">*</span> <span class="n">sample_weight</span><span class="p">)</span>
+        <span class="n">fns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_true</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">sample_weight</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_type</span> <span class="o">==</span> <span class="s1">&#39;Fraud&#39;</span><span class="p">:</span>
+            <span class="n">revenue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chargeback_multiplier</span> <span class="o">*</span> <span class="p">(</span><span class="n">tps</span> <span class="o">-</span> <span class="n">fns</span><span class="p">)</span> <span class="o">+</span> <span class="n">tns</span> <span class="o">-</span> <span class="n">fps</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_type</span> <span class="o">==</span> <span class="s1">&#39;NonFraud&#39;</span><span class="p">:</span>
+            <span class="n">revenue</span> <span class="o">=</span> <span class="n">tps</span> <span class="o">-</span> <span class="n">fns</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">chargeback_multiplier</span> <span class="o">*</span> <span class="p">(</span><span class="n">tns</span> <span class="o">-</span> <span class="n">fps</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">revenue</span></div></div>
+
+
+<div class="viewcode-block" id="AlertsPerDay"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.AlertsPerDay">[docs]</a><span class="k">class</span> <span class="nc">AlertsPerDay</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the negative squared difference between the number of alerts per</span>
+<span class="sd">    day in the binary predictor vs the expected.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_alerts_expected_per_day</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">no_of_days_in_file</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            n_alerts_expected_per_day (int): expected number of alerts for the </span>
+<span class="sd">                given rule.</span>
+<span class="sd">            no_of_days_in_file (int): number of days of data provided in the </span>
+<span class="sd">                file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_alerts_expected_per_day</span> <span class="o">=</span> <span class="n">n_alerts_expected_per_day</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_of_days_in_file</span> <span class="o">=</span> <span class="n">no_of_days_in_file</span>
+
+<div class="viewcode-block" id="AlertsPerDay.fit"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.AlertsPerDay.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the negative squared difference between the number of alerts </span>
+<span class="sd">        per day in the binary predictor vs the expected.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            y_pred (Union[np.array, pd.Series]): The binary predictor column.</span>
+<span class="sd">            n_alerts_expected_per_day : The expected number of alerts per day </span>
+<span class="sd">                for the given rule.</span>
+<span class="sd">            no_of_days_in_file : The number of days of data provided in </span>
+<span class="sd">                `y_pred`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The negative squared difference between the number of alerts </span>
+<span class="sd">                per day in `y_pred` vs `n_alerts_expected_per_day`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">n_alerts_per_day</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">no_of_days_in_file</span>
+        <span class="n">f_min</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_alerts_per_day</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">n_alerts_expected_per_day</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">f_min</span></div></div>
+
+
+<div class="viewcode-block" id="PercVolume"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.PercVolume">[docs]</a><span class="k">class</span> <span class="nc">PercVolume</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the negative squared difference between the percentage of the </span>
+<span class="sd">    overall volume that the binary predictor flags vs the expected.    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perc_vol_expected</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            perc_vol_expected (float): expected percentage of the overall</span>
+<span class="sd">                volume that the binary predictor should flag.            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">perc_vol_expected</span> <span class="o">=</span> <span class="n">perc_vol_expected</span>
+
+<div class="viewcode-block" id="PercVolume.fit"><a class="viewcode-back" href="../../../../argo.rule_optimisation.rule_optimisation.optimisation_functions.html#argo.rule_optimisation.rule_optimisation.optimisation_functions.PercVolume.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the negative squared difference between the percentage of </span>
+<span class="sd">        the overall volume that the binary predictor flags vs the expected. </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            y_pred (Union[np.array, pd.Series]): The binary predictor column.</span>
+<span class="sd">            n_alerts_expected_per_day : The expected number of alerts per day </span>
+<span class="sd">                for the given rule.</span>
+<span class="sd">            no_of_days_in_file : The number of days of data provided in </span>
+<span class="sd">                `y_pred`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: the negative squared difference between the percentage of </span>
+<span class="sd">                the overall volume that `y_pred` flags vs `perc_vol_expected`.              </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">perc_flagged</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">f_min</span> <span class="o">=</span> <span class="p">(</span><span class="n">perc_flagged</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">perc_vol_expected</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">f_min</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Simility Data Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

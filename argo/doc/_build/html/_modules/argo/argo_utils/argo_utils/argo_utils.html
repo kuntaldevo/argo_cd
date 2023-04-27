@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>argo.argo_utils.argo_utils.argo_utils &mdash; ARGO  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link href="../../../../_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> ARGO
+          
+
+          
+            
+            <img src="../../../../_static/argo_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../argo.html">argo package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ARGO</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>argo.argo_utils.argo_utils.argo_utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for argo.argo_utils.argo_utils.argo_utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Shared functions for ARGO packages&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<div class="viewcode-block" id="convert_conditions_to_argo_string"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.convert_conditions_to_argo_string">[docs]</a><span class="k">def</span> <span class="nf">convert_conditions_to_argo_string</span><span class="p">(</span><span class="n">list_of_conditions</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+                                      <span class="n">columns_int</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+                                      <span class="n">columns_cat</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a list of conditions to the standard ARGO string format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        list_of_conditions (list): Each element contains a tuple of the </span>
+<span class="sd">            feature (str), operator (str) and value (numeric) for each </span>
+<span class="sd">            condition in the rule.</span>
+<span class="sd">        columns_int (list): List of integer columns.</span>
+<span class="sd">        columns_cat (list): List of OHE categorical columns.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The ARGO-readable rule name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">convert_values_for_columns_int</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method for converting a condition containing an integer value from </span>
+<span class="sd">        float to int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">operator</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&gt;=&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">feature</span><span class="p">,</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operator</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&lt;=&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">feature</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">feature</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">value</span>
+
+    <span class="n">conditions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">list_of_conditions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">columns_cat</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">operator</span> <span class="o">==</span> <span class="s1">&#39;&lt;=&#39;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">operator</span> <span class="o">==</span> <span class="s1">&#39;==&#39;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">condition</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;(X[&#39;</span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2">&#39;]==False)&quot;</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">operator</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">operator</span> <span class="o">==</span> <span class="s1">&#39;==&#39;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">condition</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;(X[&#39;</span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2">&#39;]==True)&quot;</span>
+        <span class="c1"># If feature is an int, round the value</span>
+        <span class="k">elif</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">columns_int</span><span class="p">:</span>
+            <span class="n">feature</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">convert_values_for_columns_int</span><span class="p">(</span>
+                <span class="n">feature</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;(X[&#39;</span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2">&#39;]</span><span class="si">{</span><span class="n">operator</span><span class="si">}{</span><span class="n">value</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;(X[&#39;</span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2">&#39;]</span><span class="si">{</span><span class="n">operator</span><span class="si">}{</span><span class="n">value</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+    <span class="n">conditions</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&amp;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="clean_dup_features_from_conditions"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.clean_dup_features_from_conditions">[docs]</a><span class="k">def</span> <span class="nf">clean_dup_features_from_conditions</span><span class="p">(</span><span class="n">list_of_conditions</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes unnecessary conditions from a rule (e.g. for a branch in a tree, </span>
+<span class="sd">    the same feature and condition can be referenced, the threshold value is </span>
+<span class="sd">    different. This method just takes the relevant threshold value).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        list_of_conditions (list): Each element contains a tuple of the </span>
+<span class="sd">            feature, operator and value for each condition in the rule.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: Cleaned list of conditions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">dedupe_conditions</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+        <span class="n">list_of_values</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">val</span> <span class="k">for</span> <span class="n">feat</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">list_of_conditions</span> <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="n">feature</span> <span class="ow">and</span> <span class="n">op</span> <span class="o">==</span> <span class="n">operator</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">operator</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">feature</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">list_of_values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">operator</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">feature</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">list_of_values</span><span class="p">)</span>
+
+    <span class="n">unique_feat_op_list</span> <span class="o">=</span> <span class="p">{(</span><span class="n">feat</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span> <span class="k">for</span> <span class="n">feat</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">list_of_conditions</span><span class="p">}</span>
+    <span class="n">list_of_conditions_cleaned</span> <span class="o">=</span> <span class="p">[</span><span class="n">dedupe_conditions</span><span class="p">(</span>
+        <span class="n">unique_feat</span><span class="p">,</span> <span class="n">unique_op</span><span class="p">)</span> <span class="k">for</span> <span class="n">unique_feat</span><span class="p">,</span> <span class="n">unique_op</span> <span class="ow">in</span> <span class="n">unique_feat_op_list</span><span class="p">]</span>
+    <span class="n">list_of_conditions_cleaned</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">list_of_conditions_cleaned</span></div>
+
+
+<div class="viewcode-block" id="generate_empty_data_structures"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.generate_empty_data_structures">[docs]</a><span class="k">def</span> <span class="nf">generate_empty_data_structures</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates data structures often used in classes in ARGO.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Contains the rule_descriptions and X_rules dataframes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;Rule&#39;</span><span class="p">,</span> <span class="s1">&#39;Precision&#39;</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">,</span> <span class="s1">&#39;nConditions&#39;</span><span class="p">,</span> <span class="s1">&#39;PercDataFlagged&#39;</span><span class="p">,</span> <span class="s1">&#39;OptMetric&#39;</span>
+    <span class="p">]</span>
+    <span class="n">rule_descriptions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">rule_descriptions</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Rule&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">X_rules</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">rule_descriptions</span><span class="p">,</span> <span class="n">X_rules</span></div>
+
+
+<div class="viewcode-block" id="return_columns_types"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.return_columns_types">[docs]</a><span class="k">def</span> <span class="nf">return_columns_types</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the integer, float and OHE categorical columns for a given dataset.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (pd.DataFrame): Dataset.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: list of integer columns, list of float columns, list of OHE </span>
+<span class="sd">            categorical columns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">int_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s1">&#39;Int64&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">X_no_int64</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">int_cols</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">int_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">X_no_int64</span><span class="p">,</span> <span class="n">X_no_int64</span><span class="o">.</span><span class="n">round</span><span class="p">())</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">int_cols</span> <span class="o">=</span> <span class="n">int_cols</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_no_int64</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">int_mask</span><span class="p">])</span>
+    <span class="n">float_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_no_int64</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="o">~</span><span class="n">int_mask</span><span class="p">])</span>
+    <span class="n">ohe_cat_cols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">int_cols</span><span class="p">:</span>
+        <span class="n">unique_values</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="n">unique_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">unique_values</span><span class="p">)</span>
+        <span class="n">unique_values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">unique_values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unique_values</span> <span class="o">==</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}:</span>
+            <span class="n">ohe_cat_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">int_cols</span><span class="p">,</span> <span class="n">ohe_cat_cols</span><span class="p">,</span> <span class="n">float_cols</span></div>
+
+
+<div class="viewcode-block" id="sort_rule_dfs_by_opt_metric"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.sort_rule_dfs_by_opt_metric">[docs]</a><span class="k">def</span> <span class="nf">sort_rule_dfs_by_opt_metric</span><span class="p">(</span><span class="n">rule_descriptions</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                                <span class="n">X_rules</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method for sorting and reindexing rule_descriptions and X_rules by </span>
+<span class="sd">    opt_metric</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rule_descriptions</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+        <span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OptMetric&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">X_rules</span> <span class="o">=</span> <span class="n">X_rules</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">rule_descriptions</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rule_descriptions</span><span class="p">,</span> <span class="n">X_rules</span></div>
+
+
+<div class="viewcode-block" id="combine_rule_dfs"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.combine_rule_dfs">[docs]</a><span class="k">def</span> <span class="nf">combine_rule_dfs</span><span class="p">(</span><span class="n">rule_descriptions_1</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                     <span class="n">X_rules_1</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                     <span class="n">rule_descriptions_2</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                     <span class="n">X_rules_2</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Combines the rule_description and X_rules object of two rule sets&quot;&quot;&quot;</span>
+
+    <span class="n">rule_descriptions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">rule_descriptions_1</span><span class="p">,</span> <span class="n">rule_descriptions_2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">X_rules</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_rules_1</span><span class="p">,</span> <span class="n">X_rules_2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rule_descriptions</span><span class="p">,</span> <span class="n">X_rules</span></div>
+
+
+<div class="viewcode-block" id="return_opt_func_perf"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.return_opt_func_perf">[docs]</a><span class="k">def</span> <span class="nf">return_opt_func_perf</span><span class="p">(</span><span class="n">opt_func</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">y_preds</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_true</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the given optimisation function across one or multiple binary</span>
+<span class="sd">    predictors.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        opt_func (object): A function/method which calculates a custom metric </span>
+<span class="sd">            (e.g. Fbeta score) for each column.</span>
+<span class="sd">        y_preds (np.ndarray): Set of binary integer predictors. Can also be a </span>
+<span class="sd">            single predictor.</span>
+<span class="sd">        y_true (np.ndarray, optional): Binary integer target column. Defaults </span>
+<span class="sd">            to None.        </span>
+<span class="sd">        sample_weight (np.ndarray, optional): Row-wise sample_weights to apply. </span>
+<span class="sd">            Defaults to None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: The optimisation metric for each record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Convert relavent args to numpy arrays</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)):</span>
+        <span class="n">y_preds</span> <span class="o">=</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="ow">and</span> <span class="n">y_true</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="o">.</span><span class="n">values</span>
+    <span class="c1"># If one binary predictor and labelled data</span>
+    <span class="k">if</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y_true</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">opt_metric_results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">opt_func</span><span class="p">(</span>
+            <span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)])</span>
+    <span class="c1"># If one binary predictor and unlabelled data</span>
+    <span class="k">elif</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y_true</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">opt_metric_results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">opt_func</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_preds</span><span class="p">)])</span>
+    <span class="c1"># If more than binary predictor and labelled data</span>
+    <span class="k">elif</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y_true</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">opt_metric_results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">opt_func</span><span class="p">(</span>
+            <span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_preds</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+    <span class="c1"># If more than binary predictor and unlabelled data</span>
+    <span class="k">elif</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y_true</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">opt_metric_results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">opt_func</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_preds</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+    <span class="k">return</span> <span class="n">opt_metric_results</span></div>
+
+
+<div class="viewcode-block" id="return_binary_pred_perf_of_set_numpy"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.return_binary_pred_perf_of_set_numpy">[docs]</a><span class="k">def</span> <span class="nf">return_binary_pred_perf_of_set_numpy</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                                         <span class="n">y_preds</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                                         <span class="n">y_preds_columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+                                         <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                         <span class="n">opt_func</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the performance of a set of binary predictors given a target </span>
+<span class="sd">    column.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y_true (np.ndarray): Binary integer target column.</span>
+<span class="sd">        y_preds (np.ndarray): Set of binary integer predictors. Can also be a </span>
+<span class="sd">            single predictor.</span>
+<span class="sd">        y_preds_columns (list): Column names for the y_preds array.</span>
+<span class="sd">        sample_weight (np.ndarray, optional): Row-wise sample_weights to apply. </span>
+<span class="sd">            Defaults to None.</span>
+<span class="sd">        opt_func (object, optional): A function/method which calculates a </span>
+<span class="sd">            custom metric (e.g. Fbeta score) for each column. Defaults to None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Dataframe containing the performance metrics for each </span>
+<span class="sd">            binary predictor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convert relavent args to numpy arrays</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)):</span>
+        <span class="n">y_preds</span> <span class="o">=</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">perc_data_flagged</span> <span class="o">=</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Calculate opt_metric</span>
+    <span class="k">if</span> <span class="n">opt_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">opt_metric_results</span> <span class="o">=</span> <span class="n">return_opt_func_perf</span><span class="p">(</span><span class="n">opt_func</span><span class="o">=</span><span class="n">opt_func</span><span class="p">,</span> <span class="n">y_preds</span><span class="o">=</span><span class="n">y_preds</span><span class="p">,</span>
+                                                  <span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">opt_metric_results</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># Reshape y_true into same shape as pairwise array</span>
+    <span class="k">if</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="n">y_true_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="p">(</span><span class="n">y_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y_true_arr</span> <span class="o">=</span> <span class="n">y_true</span>
+    <span class="c1"># Calculate intersection of pairwise binary cols and y_true</span>
+    <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">sample_weight</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="n">sample_weight_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+                <span class="n">sample_weight</span><span class="p">,</span> <span class="p">(</span><span class="n">y_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sample_weight_arr</span> <span class="o">=</span> <span class="n">sample_weight</span>
+        <span class="n">y_preds</span> <span class="o">=</span> <span class="n">y_preds</span> <span class="o">*</span> <span class="n">sample_weight_arr</span>
+        <span class="n">binary_y_intersect</span> <span class="o">=</span> <span class="n">y_preds</span> <span class="o">*</span> <span class="n">y_true_arr</span>
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">*</span> <span class="n">sample_weight</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">binary_y_intersect</span> <span class="o">=</span> <span class="n">y_preds</span> <span class="o">*</span> <span class="n">y_true_arr</span>
+    <span class="c1"># Calculate num records flagged and ratio flagged per rule</span>
+    <span class="n">y_preds_sums</span> <span class="o">=</span> <span class="n">y_preds</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">y_preds_sums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_preds_sums</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">y_preds_sums</span><span class="p">)</span>
+    <span class="c1"># Calculate num records flagged in intersection</span>
+    <span class="n">binary_y_intersect_sum</span> <span class="o">=</span> <span class="n">binary_y_intersect</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Calculate precision, recall and fscore of pairwise rules</span>
+    <span class="n">precisions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">binary_y_intersect_sum</span><span class="p">,</span> <span class="n">y_preds_sums</span><span class="p">))</span>
+    <span class="n">recalls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">binary_y_intersect_sum</span><span class="p">,</span> <span class="n">y_true</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;Precision&#39;</span><span class="p">:</span> <span class="n">precisions</span><span class="p">,</span>
+        <span class="s1">&#39;Recall&#39;</span><span class="p">:</span> <span class="n">recalls</span><span class="p">,</span>
+        <span class="s1">&#39;PercDataFlagged&#39;</span><span class="p">:</span> <span class="n">perc_data_flagged</span><span class="p">,</span>
+        <span class="s1">&#39;OptMetric&#39;</span><span class="p">:</span> <span class="n">opt_metric_results</span><span class="p">,</span>
+    <span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">y_preds_columns</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results</span></div>
+
+
+<div class="viewcode-block" id="return_rule_descriptions_from_X_rules"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.return_rule_descriptions_from_X_rules">[docs]</a><span class="k">def</span> <span class="nf">return_rule_descriptions_from_X_rules</span><span class="p">(</span><span class="n">X_rules</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                                          <span class="n">X_rules_cols</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+                                          <span class="n">y_true</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                          <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                          <span class="n">opt_func</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the performance metrics for the standard `rule_descriptions`</span>
+<span class="sd">    dataframe, given a set of rule binary columns</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X_rules (pd.DataFrame): Set of rule binary columns.</span>
+<span class="sd">        X_rules_cols (list): Columns associated with `X_rules`.</span>
+<span class="sd">        y_true (np.ndarray, optional): Binary integer target column. Defaults</span>
+<span class="sd">            to None.</span>
+<span class="sd">        sample_weight (np.ndarray, optional): Row-wise sample_weights to apply. </span>
+<span class="sd">            Defaults to None.</span>
+<span class="sd">        opt_func (object, optional): A function/method which calculates a </span>
+<span class="sd">            custom metric (e.g. Fbeta score) for each rule. Defaults to None. </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The performance metrics for the standard </span>
+<span class="sd">            `rule_descriptions` dataframe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">y_true</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rule_descriptions</span> <span class="o">=</span> <span class="n">return_binary_pred_perf_of_set_numpy</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span>
+                                                                 <span class="n">y_preds</span><span class="o">=</span><span class="n">X_rules</span><span class="p">,</span>
+                                                                 <span class="n">y_preds_columns</span><span class="o">=</span><span class="n">X_rules_cols</span><span class="p">,</span>
+                                                                 <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span>
+                                                                 <span class="n">opt_func</span><span class="o">=</span><span class="n">opt_func</span>
+                                                                 <span class="p">)</span>
+        <span class="n">rule_descriptions</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Rule&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">opt_metric_results</span> <span class="o">=</span> <span class="n">return_opt_func_perf</span><span class="p">(</span><span class="n">opt_func</span><span class="o">=</span><span class="n">opt_func</span><span class="p">,</span>
+                                                  <span class="n">y_preds</span><span class="o">=</span><span class="n">X_rules</span><span class="p">)</span>
+        <span class="n">perc_data_flagged</span> <span class="o">=</span> <span class="n">X_rules</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">rule_descriptions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;PercDataFlagged&#39;</span><span class="p">:</span> <span class="n">perc_data_flagged</span><span class="p">,</span>
+            <span class="s1">&#39;OptMetric&#39;</span><span class="p">:</span> <span class="n">opt_metric_results</span><span class="p">,</span>
+        <span class="p">},</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">X_rules_cols</span><span class="p">)</span>
+        <span class="n">rule_descriptions</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Rule&#39;</span>
+    <span class="k">return</span> <span class="n">rule_descriptions</span></div>
+
+
+<div class="viewcode-block" id="flatten_stringified_json_column"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.flatten_stringified_json_column">[docs]</a><span class="k">def</span> <span class="nf">flatten_stringified_json_column</span><span class="p">(</span><span class="n">X_column</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flattens JSONs contained in a column to their own columns.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X_column (pd.Series): Contains the JSONs to be flattened.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Contains a column per key-value pair in the JSONs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">X_column</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">X_flattened</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="nb">list</span><span class="p">(</span><span class="n">X_column</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+    <span class="n">X_flattened</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">X_column</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">X_flattened</span></div>
+
+
+<div class="viewcode-block" id="count_rule_conditions"><a class="viewcode-back" href="../../../../argo.argo_utils.argo_utils.argo_utils.html#argo.argo_utils.argo_utils.argo_utils.count_rule_conditions">[docs]</a><span class="k">def</span> <span class="nf">count_rule_conditions</span><span class="p">(</span><span class="n">rule_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the number of conditions in a rule string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rule_string (str): The standard ARGO string representation</span>
+<span class="sd">            of the rule.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Number of conditions in the rule.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_conditions</span> <span class="o">=</span> <span class="n">rule_string</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;X[&#39;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n_conditions</span></div>
+
+
+<span class="c1"># def return_binary_pred_perf_of_set_pandas(y_true, y_preds,</span>
+<span class="c1">#                                           sample_weight=None, opt_func=None):</span>
+<span class="c1">#     total_num_flagged = y_preds_ks.sum().to_pandas()</span>
+<span class="c1">#     total_perc_flagged = y_preds_ks.mean().to_pandas()</span>
+<span class="c1">#     new_col_names = []</span>
+<span class="c1">#     if sample_weight is not None:</span>
+<span class="c1">#         y_preds_and_true = ks.concat([y_preds_ks, y_true_ks.rename(</span>
+<span class="c1">#             &#39;y_true&#39;), sample_weight.rename(&#39;sample_weight&#39;)], axis=1)</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         y_preds_and_true = ks.concat(</span>
+<span class="c1">#             [y_preds_ks, y_true_ks.rename(&#39;y_true&#39;)], axis=1)</span>
+<span class="c1">#     for col in y_preds_and_true:</span>
+<span class="c1">#         if col == &#39;y_true&#39; or col == &#39;sample_weight&#39;:</span>
+<span class="c1">#             continue</span>
+<span class="c1">#         new_col_name = f&#39;{col}_equals_y_true&#39;</span>
+<span class="c1">#         if sample_weight is not None:</span>
+<span class="c1">#             y_preds_and_true[new_col_name] = y_preds_and_true[col] * \</span>
+<span class="c1">#                 y_preds_and_true[&#39;y_true&#39;] * y_preds_and_true[&#39;sample_weight&#39;]</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             y_preds_and_true[new_col_name] = y_preds_and_true[col] * \</span>
+<span class="c1">#                 y_preds_and_true[&#39;y_true&#39;]</span>
+<span class="c1">#         new_col_names.append(new_col_name)</span>
+<span class="c1">#     preds_equal_true = y_preds_and_true[new_col_names].sum().to_pandas()</span>
+<span class="c1">#     precisions = pd.Series(</span>
+<span class="c1">#         preds_equal_true.values/total_num_flagged.values, y_preds.columns, name=&#39;Precision&#39;)</span>
+<span class="c1">#     return precisions</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Simility Data Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

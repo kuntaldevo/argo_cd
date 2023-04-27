@@ -1,0 +1,4 @@
+eid,account_number_num_distinct_txn_per_account_number_1day,primary_address_avg_order_total_per_primary_address_7day,is_existing_user
+txn1,1.0,1.5,True
+txn2,2.0,3.0,False
+txn3,,,

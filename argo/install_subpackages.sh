@@ -1,0 +1,12 @@
+pip install ./argo/argo_utils/.
+pip install ./argo/correlation_reduction/.
+pip install ./argo/read_data/.
+pip install ./argo/rule_application/.
+pip install ./argo/rule_filtering/.
+pip install ./argo/rule_generation/.
+pip install ./argo/rule_optimisation/.
+pip install ./argo/rule_scoring/.
+pip install ./argo/rules/.
+pip install ./argo/simility_apis/.
+pip install ./argo/simility_requests/.
+pip install ./argo/system_config_generation/.

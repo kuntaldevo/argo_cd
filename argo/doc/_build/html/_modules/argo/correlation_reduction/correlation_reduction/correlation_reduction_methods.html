@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>argo.correlation_reduction.correlation_reduction.correlation_reduction_methods &mdash; ARGO  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link href="../../../../_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> ARGO
+          
+
+          
+            
+            <img src="../../../../_static/argo_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../argo.html">argo package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ARGO</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>argo.correlation_reduction.correlation_reduction.correlation_reduction_methods</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for argo.correlation_reduction.correlation_reduction.correlation_reduction_methods</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Classes for reducing correlated features&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">AgglomerativeClustering</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+
+<div class="viewcode-block" id="AgglomerativeClusteringFeatureReduction"><a class="viewcode-back" href="../../../../argo.correlation_reduction.correlation_reduction.correlation_reduction_methods.html#argo.correlation_reduction.correlation_reduction.correlation_reduction_methods.AgglomerativeClusteringFeatureReduction">[docs]</a><span class="k">class</span> <span class="nc">AgglomerativeClusteringFeatureReduction</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes similar columns (given a similarity function) by calculating the </span>
+<span class="sd">    simility matrix then iteratively running Agglomerative Clustering on the </span>
+<span class="sd">    similarity matrix and dropping columns that are correlated. Only one column </span>
+<span class="sd">    per cluster is kept.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        columns_to_keep (list): The final list of columns with the correlated </span>
+<span class="sd">            columns removed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">similarity_function</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">columns_performance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            threshold (float): The median of the cluster&#39;s simility metric is </span>
+<span class="sd">                compared against this threshold - if the median is greater than </span>
+<span class="sd">                this threshold, the columns within the cluster are deemed </span>
+<span class="sd">                correlated, with only the top performing column being kept.</span>
+<span class="sd">            strategy (str): Can be either &#39;top_down&#39; or &#39;bottom_up&#39;. &#39;top_down&#39; </span>
+<span class="sd">                begins clustering from the top, with two clusters per iteration </span>
+<span class="sd">                being calculated. &#39;bottom_up&#39; begins clustering from the </span>
+<span class="sd">                bottom, with half of the total number of columns per iteration </span>
+<span class="sd">                being used to define the number of clusters.</span>
+<span class="sd">            similarity_function (object): The similarity function to use for </span>
+<span class="sd">                calculating the similarity between columns. It must return a </span>
+<span class="sd">                dataframe containing the simility matrix. See the </span>
+<span class="sd">                simility_functions module for out-of-the-box functions.</span>
+<span class="sd">            columns_performance (pd.Series, optional): Series containing the </span>
+<span class="sd">                performance metric of each column (e.g. Fbeta score). This is </span>
+<span class="sd">                used to determine the top performing column per cluster. If not</span>
+<span class="sd">                provided, a random column from the cluster will be kept. </span>
+<span class="sd">                Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+        <span class="k">if</span> <span class="n">strategy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top_down&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom_up&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;strategy must be either top_down or bottom_up&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">strategy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">similarity_function</span> <span class="o">=</span> <span class="n">similarity_function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns_performance</span> <span class="o">=</span> <span class="n">columns_performance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns_to_keep</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="AgglomerativeClusteringFeatureReduction.fit"><a class="viewcode-back" href="../../../../argo.correlation_reduction.correlation_reduction.correlation_reduction_methods.html#argo.correlation_reduction.correlation_reduction.correlation_reduction_methods.AgglomerativeClusteringFeatureReduction.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">print_clustermap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the similar columns in the dataset X.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X (pd.DataFrame): Dataframe to be reduced.</span>
+<span class="sd">            print_clustermap (bool, optional): If True, the clustermap at each </span>
+<span class="sd">                iteration will be printed. Defaults to False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">zero_var_cols</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">zero_var_cols</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Columns </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">zero_var_cols</span><span class="p">)</span><span class="si">}</span><span class="s1"> have zero variance, which will result in NaN values for the similarity matrix&#39;</span><span class="p">)</span>
+        <span class="n">similarity_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">similarity_function</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">num_remaining_columns</span> <span class="o">=</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># While more than 1 column remains in the similarity_df, continue to</span>
+        <span class="c1"># cluster and drop correlated columns</span>
+        <span class="k">while</span> <span class="n">num_remaining_columns</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">n_clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_n_clusters</span><span class="p">(</span><span class="n">similarity_df</span><span class="p">)</span>
+            <span class="n">clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agglomerative_clustering</span><span class="p">(</span>
+                <span class="n">similarity_df</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">print_clustermap</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot_clustermap</span><span class="p">(</span><span class="n">similarity_df</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">==</span> <span class="s1">&#39;top_down&#39;</span><span class="p">:</span>
+                <span class="n">columns_to_drop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_top_down</span><span class="p">(</span>
+                    <span class="n">clusters</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">similarity_df</span><span class="o">=</span><span class="n">similarity_df</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">==</span> <span class="s1">&#39;bottom_up&#39;</span><span class="p">:</span>
+                <span class="n">columns_to_drop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bottom_up</span><span class="p">(</span>
+                    <span class="n">clusters</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">similarity_df</span><span class="o">=</span><span class="n">similarity_df</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">columns_to_drop</span><span class="p">:</span>
+                <span class="n">similarity_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns_to_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">similarity_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns_to_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">num_remaining_columns</span> <span class="o">=</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">columns_to_keep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns_to_keep</span> <span class="o">+</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="k">break</span></div>
+
+<div class="viewcode-block" id="AgglomerativeClusteringFeatureReduction.transform"><a class="viewcode-back" href="../../../../argo.correlation_reduction.correlation_reduction.correlation_reduction_methods.html#argo.correlation_reduction.correlation_reduction.correlation_reduction_methods.AgglomerativeClusteringFeatureReduction.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes similar columns from the dataset X.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X (pd.DataFrame): Dataframe to be reduced.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            pd.DataFrame: Dataframe with the similar columns removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">columns_to_keep</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="AgglomerativeClusteringFeatureReduction.fit_transform"><a class="viewcode-back" href="../../../../argo.correlation_reduction.correlation_reduction.correlation_reduction_methods.html#argo.correlation_reduction.correlation_reduction.correlation_reduction_methods.AgglomerativeClusteringFeatureReduction.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                      <span class="n">print_clustermap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the similar columns in the dataset X, then removes them.        </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X (pd.DataFrame): Dataframe of binary columns.</span>
+<span class="sd">            print_clustermap (bool, optional): If True, the clustermap at each iteration will be printed. Defaults to False.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            pd.DataFrame: Dataframe of dissimilar binary columns.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">print_clustermap</span><span class="o">=</span><span class="n">print_clustermap</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_bottom_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                   <span class="n">similarity_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Begins clustering from the bottom, with half of the total number of </span>
+<span class="sd">        columns per iteration being used to define the number of clusters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">columns_to_drop</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">n_cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">):</span>
+            <span class="n">cluster</span> <span class="o">=</span> <span class="n">clusters</span><span class="p">[</span><span class="n">clusters</span> <span class="o">==</span> <span class="n">n_cluster</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+            <span class="n">similarity_cluster</span> <span class="o">=</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cluster</span><span class="p">,</span> <span class="n">cluster</span><span class="p">]</span>
+            <span class="c1"># If the cluster contains one column only, continue to next</span>
+            <span class="c1"># iteration</span>
+            <span class="k">if</span> <span class="n">similarity_cluster</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">cluster_median</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_cluster_median</span><span class="p">(</span>
+                <span class="n">similarity_cluster</span><span class="o">=</span><span class="n">similarity_cluster</span><span class="p">)</span>
+            <span class="c1"># If cluster_median &gt; threshold, keep top performing column by</span>
+            <span class="c1"># Fscore only</span>
+            <span class="k">if</span> <span class="n">cluster_median</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
+                <span class="n">columns</span> <span class="o">=</span> <span class="n">similarity_cluster</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="n">top_performer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_performer</span><span class="p">(</span>
+                    <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns_performance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columns_performance</span><span class="p">)</span>
+                <span class="c1"># If bottom_up, drop all columns in cluster except top</span>
+                <span class="c1"># performer</span>
+                <span class="n">columns</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">top_performer</span><span class="p">)</span>
+                <span class="c1"># If bottom_up and only one cluster remains, keep top</span>
+                <span class="c1"># performing column.</span>
+                <span class="k">if</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">columns_to_keep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">top_performer</span><span class="p">)</span>
+                <span class="n">columns_to_drop</span> <span class="o">=</span> <span class="n">columns_to_drop</span> <span class="o">+</span> <span class="n">columns</span>
+        <span class="k">return</span> <span class="n">columns_to_drop</span>
+
+    <span class="k">def</span> <span class="nf">_top_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="n">similarity_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Begins clustering from the top, with two clusters per iteration being </span>
+<span class="sd">        calculated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">columns_to_drop</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">n_cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">):</span>
+            <span class="n">cluster</span> <span class="o">=</span> <span class="n">clusters</span><span class="p">[</span><span class="n">clusters</span> <span class="o">==</span> <span class="n">n_cluster</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+            <span class="n">similarity_cluster</span> <span class="o">=</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cluster</span><span class="p">,</span> <span class="n">cluster</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">similarity_cluster</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">columns_to_keep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">similarity_cluster</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">continue</span>
+            <span class="n">cluster_median</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_cluster_median</span><span class="p">(</span>
+                <span class="n">similarity_cluster</span><span class="o">=</span><span class="n">similarity_cluster</span><span class="p">)</span>
+            <span class="c1"># If cluster_median &gt; threshold, keep top performing column by</span>
+            <span class="c1"># Fscore only</span>
+            <span class="k">if</span> <span class="n">cluster_median</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
+                <span class="n">columns</span> <span class="o">=</span> <span class="n">similarity_cluster</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="n">top_performer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_performer</span><span class="p">(</span>
+                    <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns_performance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columns_performance</span><span class="p">)</span>
+                <span class="c1"># For top_down, keep top performing column then drop all</span>
+                <span class="c1"># columns in cluster for next iteration</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">columns_to_keep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">top_performer</span><span class="p">)</span>
+                <span class="n">columns_to_drop</span> <span class="o">=</span> <span class="n">columns_to_drop</span> <span class="o">+</span> <span class="n">columns</span>
+        <span class="k">return</span> <span class="n">columns_to_drop</span>
+
+    <span class="k">def</span> <span class="nf">_set_n_clusters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">similarity_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Sets the number of clusters to use&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">==</span> <span class="s1">&#39;top_down&#39;</span><span class="p">:</span>
+            <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">==</span> <span class="s1">&#39;bottom_up&#39;</span><span class="p">:</span>
+            <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">similarity_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">n_clusters</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_calculate_cluster_median</span><span class="p">(</span><span class="n">similarity_cluster</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Calculates the median of a cluster&quot;&quot;&quot;</span>
+
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">similarity_cluster</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="n">cluster_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmedian</span><span class="p">(</span><span class="n">similarity_cluster</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cluster_median</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_top_performer</span><span class="p">(</span><span class="n">columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+                           <span class="n">columns_performance</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the top performing column in a cluster by it&#39;s performance </span>
+<span class="sd">        (if provided). If not provided, it will just return a column from the </span>
+<span class="sd">        cluster</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">columns_performance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">performance</span> <span class="o">=</span> <span class="n">columns_performance</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+                <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">top_performer</span> <span class="o">=</span> <span class="n">performance</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">top_performer</span> <span class="o">=</span> <span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">top_performer</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_agglomerative_clustering</span><span class="p">(</span><span class="n">similarity_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                                  <span class="n">n_clusters</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs Agglomerative Clustering on a dataframe of similarities and </span>
+<span class="sd">        returns the cluster each column falls into</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">agg_clustering</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+        <span class="n">ac_preds</span> <span class="o">=</span> <span class="n">agg_clustering</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">similarity_df</span><span class="p">)</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ac_preds</span><span class="p">,</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">clusters</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_plot_clustermap</span><span class="p">(</span><span class="n">similarity_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Plots the clustermap of a given similarity dataframe&quot;&quot;&quot;</span>
+
+        <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span><span class="n">similarity_df</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Simility Data Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

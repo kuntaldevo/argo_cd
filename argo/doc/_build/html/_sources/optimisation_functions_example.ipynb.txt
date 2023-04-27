@@ -1,0 +1,527 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Optimisation Functions Example"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This notebook contains an example of how optimisation functions can be applied to a dataset, how they can be used in other ARGO modules and how to create your own."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Requirements"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To run, you'll need the following:\n",
+    "\n",
+    "* Install the Optimisation package - see the readme for more information.\n",
+    "* A dataset containing binary predictor columns and a binary target column."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "----"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Import packages"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from rule_optimisation.optimisation_functions import Precision, Recall, FScore, Revenue, AlertsPerDay, PercVolume\n",
+    "\n",
+    "import pandas as pd\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Create data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's create some dummy predictor columns and a binary target column. For this example, let's assume the dummy predictor columns represent rules that have been applied to a dataset."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.random.seed(0)\n",
+    "\n",
+    "y_pred = pd.Series(np.random.randint(0, 2, 1000))\n",
+    "y = pd.Series(np.random.randint(0, 2, 1000))\n",
+    "amounts = pd.Series(np.random.randint(0, 1000, 1000))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "----"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Apply optimisation functions"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The example applies four supervised optimisation functions and two unsupervised optimisation function:\n",
+    "\n",
+    "**Supervised optimisation functions**\n",
+    "\n",
+    "* Precision score\n",
+    "* Recall score\n",
+    "* Fbeta score\n",
+    "* Revenue\n",
+    "\n",
+    "**Unsupervised optimisation functions**\n",
+    "\n",
+    "* Alerts per day (calculates the negative squared difference between the daily number of records a rule flags vs the targetted daily number of records flagged)\n",
+    "* Percentage of volume (calculates the negative squared difference between the percentage of the overall volume that the rule flags vs the targetted percentage of volume flagged)\n",
+    "\n",
+    "**Note that the *FScore*, *Precision* or *Recall* classes are ~100 times faster on larger datasets compared to the same functions from Sklearn's *metrics* module.**"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Instantiate class and run fit method"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can run the *.fit()* method to calculate the optimisation metric for each column in the dataset."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Supervised optimisation functions"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Precision score"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "precision = Precision()\n",
+    "rule_precision = precision.fit(y_true=y, y_pred=y_pred, sample_weight=None)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Recall score"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "recall = Recall()\n",
+    "rule_recall = recall.fit(y_true=y, y_pred=y_pred, sample_weight=None)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Fbeta score (here, beta=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "f1 = FScore(beta=1)\n",
+    "rule_f1 = f1.fit(y_true=y, y_pred=y_pred, sample_weight=None)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Revenue"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "rev = Revenue(y_type='Fraud', chargeback_multiplier=2)\n",
+    "rule_rev = rev.fit(y_true=y, y_pred=y_pred, sample_weight=amounts)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Unsupervised optimisation functions"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Alerts per day"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "apd = AlertsPerDay(n_alerts_expected_per_day=5, no_of_days_in_file=10)\n",
+    "rule_apd = apd.fit(y_pred=y_pred)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Percentage of volume"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pv = PercVolume(perc_vol_expected=0.02)\n",
+    "rule_pv = pv.fit(y_pred=y_pred)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Outputs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The *.fit()* method returns the optimisation metric defined by the class:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0.5376984126984127"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rule_precision"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0.5262135922330097"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rule_recall"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0.5318940137389597"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rule_f1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "35645"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rule_rev"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "-2061.16"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rule_apd"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "-0.234256"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rule_pv"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The *.fit()* method can be fed into various ARGO modules as an argument (wherever the opt_func parameter appears). For example, in the RuleGeneratorOpt module, you can set the metric used to optimise the rules using this methodology."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "----"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Creating your own optimisation function"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Say we want to create a class which calculates the Positive likelihood ratio (TP rate/FP rate)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The main class structure involves having a *.fit()* method which has three arguments - the binary predictor, the binary target and any event specific weights to apply. This method should return a single numeric value."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class PositiveLikelihoodRatio:\n",
+    "    \n",
+    "    def fit(self, y_true: np.array, y_pred: np.array, sample_weight: np.array) -> float:\n",
+    "        # Calculate TPR\n",
+    "        tpr = (y_true * y_pred).sum() / y_true.sum()\n",
+    "        # Calculate FPR\n",
+    "        fpr = (np.where(y_true==0, 1, 0) * y_pred).sum()/(np.where(y_true==0, 1, 0)).sum()\n",
+    "        if tpr == 0 or fpr == 0:\n",
+    "            return 0\n",
+    "        else:\n",
+    "            return tpr/fpr"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can then apply the *.fit()* method to the dataset to check it works:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plr = PositiveLikelihoodRatio()\n",
+    "rule_plr = plr.fit(y_true=y, y_pred=y_pred, sample_weight=None)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1.0953373057210716"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rule_plr"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Finally, after instantiating the class, we can feed the *.fit* method to a relevant ARGO module (for example, we can feed the *.fit()* method to the *opt_func* parameter in the *RuleGeneratorOpt* class so that rules are generated which maximise the Positive likelihood ratio)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "----"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## The End"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "That's it folks - if you have any queries or suggestions please put them in the *#sim-datatools-help* Slack channel or email James directly."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "rule_optimisation",
+   "language": "python",
+   "name": "rule_optimisation"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
